@@ -42,7 +42,9 @@ dependencies {
     implementation "de.vandermeer:asciitable:0.3.2"
 
     testImplementation gradleTestKit()
-    testImplementation "junit:junit:4.13"
+    testImplementation('org.spockframework:spock-core:1.1-groovy-2.4') {
+        exclude module: 'groovy-all'
+    }
 }
 
 // Publishing Configuration
