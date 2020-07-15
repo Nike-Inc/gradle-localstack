@@ -1,0 +1,28 @@
+== LocalStack
+
+The plugin provides a set of tasks for easily starting and stopping the LocalStack environment in your project.
+
+=== Tasks
+
+The plugin applies default tasks, which can be executed from the Gradle command line:
+
+[options="header"]
+[cols="5,3,10,10"]
+|=======
+|Task Name          |Type | Usage | Description
+|`initLocalStack`   | Default | `./gradlew initLocalStack`  |Initializes the project with a default LocalStack Docker Compose configuration.
+|`startLocalStack`  | Default | `./gradlew startLocalStack` |Starts the LocalStack environment and executes any of the AWS services tasks that are found in the project.
+|`stopLocalStack`   | Default | `./gradlew stopLocalStack` |Stops the LocalStack environment and preserves the `.localstack` data directory.
+|`killLocalStack`   | Default | `./gradlew killLocalStack` |Stops the LocalStack environment and deletes the `.localstack` data directory.
+|`cleanLocalStack`  | Default | `./gradlew cleanLocalStack` |Deletes the `.localstack` data directory.
+|=======
+
+The plugin also provides tasks that make working with the mock AWS endpoints in LocalStack easy. Currently, the plugin
+supports the following AWS services:
+
+1. <<30-aws-cloudformation.adoc#cloudformation,CloudFormation>>
+2. <<40-aws-dynamodb.adoc#dynamodb,DynamoDB>>
+3. <<50-aws-s3.adoc#s3,S3>>
+4. <<60-aws-sqs.adoc#s3,SQS>>
+
+For more information on how to configure and use these tasks, see the documentation for each AWS service below.

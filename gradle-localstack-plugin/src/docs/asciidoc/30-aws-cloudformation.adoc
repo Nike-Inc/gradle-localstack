@@ -1,0 +1,43 @@
+[#cloudformation]
+== CloudFormation
+This plugin provides a set of tasks for working with AWS CloudFormation in your project.
+
+[IMPORTANT]
+CloudFormation support in LocalStack is incomplete and may not work for your use case. Please consult the LocalStack
+website for CloudFormation support issues.
+
+=== Tasks
+The plugin provides both default and custom tasks.
+
+[options="header"]
+[cols="5,5,3,10"]
+|=======
+|Task |Task Name          |Type | Description
+| link:./javadoc/com/nike/pdm/localstack/aws/cloudformation/CreateCFStackTask.html[CreateCFStackTask]|`createCFStack`  | Custom  | Creates a CloudFormation Stack
+| link:./javadoc/com/nike/pdm/localstack/aws/cloudformation/DeleteCFStackTask.html[DeleteCFStackTask]|`deleteCFStack`  | Default | Deletes a CloudFormation Stack
+| link:./javadoc/com/nike/pdm/localstack/aws/cloudformation/ListCFStacksTask.html[ListCFStacksTask]|`listCFStacks`   | Default | Lists all CloudFormation Stacks
+|=======
+
+=== Examples
+Example configurations for the CloudFormation tasks. For information on all available task properties please refer to the link:./javadoc/index.html[Javadocs].
+
+==== Create Stack
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-cloudformation-createstack/groovy/build.gradle[]
+----
+
+==== Delete Stack
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-cloudformation-deletestack/bash/example.sh[]
+----
+
+==== List Stacks
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-cloudformation-liststacks/bash/example.sh[]
+----

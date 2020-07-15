@@ -1,0 +1,3 @@
+task setupLocalQueue(type: CreateSqsQueueWithDlqTask) {
+    queueName = 'catalog-product-change-notification'
+}

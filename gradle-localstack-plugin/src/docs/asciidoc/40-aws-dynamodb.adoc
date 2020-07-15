@@ -1,0 +1,39 @@
+[#dynamodb]
+== DynamoDB
+This plugin provides a set of tasks for working with AWS DynamoDB in your project.
+
+=== Tasks
+The plugin provides both default and custom tasks.
+
+[options="header"]
+[cols="5,5,3,10"]
+|=======
+|Task |Task Name |Type | Description
+| link:./javadoc/com/nike/pdm/localstack/aws/dynamodb/CreateDynamoDbTableTask.html[CreateDynamoDbTableTask]|`createDynamoDbTable`  | Custom  | Creates a DynamoDB Table
+| link:./javadoc/com/nike/pdm/localstack/aws/dynamodb/DeleteDynamoDbTableTask.html[DeleteDynamoDbTableTask]|`deleteDynamoDbTable`  | Default | Deletes a DynamoDB Table
+| link:./javadoc/com/nike/pdm/localstack/aws/dynamodb/ListDynamoDbTablesTask.html[ListDynamoDbTablesTask]|`listDynamoDbTables`   | Default | Lists all DynamoDB Tables
+|=======
+
+=== Examples
+Example configurations for the DynamoDB tasks. For information on all available task properties please refer to the link:./javadoc/index.html[Javadocs].
+
+==== Create Table
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-dynamodb-createtable/groovy/build.gradle[]
+----
+
+==== Delete Table
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-dynamodb-deletetable/bash/example.sh[]
+----
+
+==== List Tables
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-dynamodb-listtables/bash/example.sh[]
+----

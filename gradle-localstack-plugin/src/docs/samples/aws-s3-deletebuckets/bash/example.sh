@@ -1,0 +1,1 @@
+./gradlew deleteS3Buckets --buckets=bucket1,bucket2

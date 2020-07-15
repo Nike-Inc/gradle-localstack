@@ -1,0 +1,11 @@
+localstack {
+
+    // ... LocalStack configuration
+
+    springboot {
+        enabled = true
+        debugPort = 5055
+        profiles = [ 'local' ]
+        jvmArgs = [ '-Dlog4j.configurationFile=log4j2-local.xml' ]
+    }
+}

@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Creates resources for the gradle-localstack-plugin-example application. Named stack example-resources.
+Resources:
+  CatalogProductsTable:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      TableName: "catalog.products"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      BillingMode: "PAY_PER_REQUEST"
+      SSESpecification:
+        SSEEnabled: true
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+  ProductChangeNotificationQueue:
+    Type: "AWS::SQS::Queue"
+    Properties:
+      QueueName: "catalog-product-change-notification"
+      MessageRetentionPeriod: 1209600
+      MaximumMessageSize: 262144

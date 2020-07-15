@@ -1,0 +1,17 @@
+= Gradle LocalStack Plugin User Guide
+
+include::00-intro.adoc[]
+
+include::10-configuration.adoc[]
+
+include::20-localstack.adoc[]
+
+include::30-aws-cloudformation.adoc[]
+
+include::40-aws-dynamodb.adoc[]
+
+include::50-aws-s3.adoc[]
+
+include::60-aws-sqs.adoc[]
+
+include::70-spring-boot.adoc[]

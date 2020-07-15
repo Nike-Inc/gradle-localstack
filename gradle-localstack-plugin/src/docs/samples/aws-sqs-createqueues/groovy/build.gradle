@@ -1,0 +1,6 @@
+task setupLocalQueue(type: CreateSqsQueuesTask) {
+    queueNames = [ 'catalog-product-change-notification' ]
+    queueAttributes = [
+            VisibilityTimeout: '10'
+    ]
+}

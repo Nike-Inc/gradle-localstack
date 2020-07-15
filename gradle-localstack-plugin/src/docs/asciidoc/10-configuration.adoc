@@ -1,0 +1,19 @@
+== Configuration
+
+The plugin provides an extension with the namespace `localstack`. The following properties can be configured:
+
+[options="header"]
+|=======
+|Property Name   |Type                |Default Value              |Description
+|`workingDir`    |`Property<File>`    |Working directory of `docker-compose` plugin if defined or `localstack` directory in project root. |The directory where the `.localstack` directory will be located at runtime.
+|`host`          |`Property<String>`  |`localhost`    |Hostname of the LocalStack Docker container.
+|`port`          |`Property<Integer>` |`4566`         |Port number of the LocalStack Edge Service exposed by the Docker container.
+|`signingRegion` |`Property<String>`  |`us-east-1`    |AWS region of the LocalStack environment.
+|=======
+
+An example configuration can be seen below:
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/config-localstack/groovy/build.gradle[]
+----

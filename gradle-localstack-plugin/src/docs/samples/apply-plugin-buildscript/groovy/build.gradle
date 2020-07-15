@@ -1,0 +1,10 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.nike.pdm.localstack:0.1.0'
+    }
+}
+
+apply plugin: 'com.nike.pdm.localstack'

@@ -1,0 +1,3 @@
+rootProject.name = 'gradle-localstack-plugin-example'
+
+includeBuild '../gradle-localstack-plugin'

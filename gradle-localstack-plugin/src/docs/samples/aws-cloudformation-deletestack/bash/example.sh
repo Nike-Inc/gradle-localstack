@@ -1,0 +1,1 @@
+./gradlew deleteCFStack --stackName=catalog-products-v1

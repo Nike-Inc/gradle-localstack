@@ -1,0 +1,37 @@
+[#springboot]
+== Spring Boot
+This plugin is designed to work seamlessly with Spring Boot. When the Spring Boot plugin is detected within the project
+this plugin will automatically add tasks that make developing and debugging your Spring Boot application within LocalStack
+seamless.
+
+=== Tasks
+
+The plugin applies default tasks, which can be executed from the Gradle command line:
+
+[options="header"]
+[cols="5,3,10,10"]
+|=======
+|Task Name              |Type      | Usage                         | Description
+|`bootRunLocal`         | Default | `./gradlew bootRunLocal`      | Starts LocalStack, configures the defined LocalStack environment, and then starts the Spring Boot application.
+|`bootRunLocalDebug`    | Default | `./gradlew bootRunLocalDebug` | Starts LocalStack, configures the defined LocalStack environment, and then starts the Spring Boot application in remote debug mode (waits for a debugger to be attached).
+|=======
+
+=== Configuration
+
+The plugin provides a nested extension with the namespace `springboot`. The following properties can be configured:
+
+[options="header"]
+|=======
+|Property Name  |Type                       |Default Value  |Description
+|`enabled`      |`Property<Boolean>`        | `true`        | Enables auto-configuration of the `bootRunLocal` and `bootRunLocalDebug` tasks.
+|`debugPort`    |`Property<Integer>`        | `5055`        | Debug port for `bootRunLocalDebug` task.
+|`profiles`     |`Property<List<String>`    | `[ 'local' ]` | List of Spring Profiles with which to start the application.
+|`jvmArgs`      |`Property<List<String>`    | `[]`          | List of JVM args with which to start the application.
+|=======
+
+An example configuration can be seen below:
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/config-springboot/groovy/build.gradle[]
+----

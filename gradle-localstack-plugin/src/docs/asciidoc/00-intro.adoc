@@ -1,0 +1,16 @@
+== Introduction
+
+Gradle plugin for setting up mock AWS endpoints during test and development using https://github.com/localstack/localstack[LocalStack].
+
+This plugin provides a number of helpful tasks for simplifying the creation of AWS resources for use in testing and development,
+as well as tasks for easily integrating Spring Boot with LocalStack, using simple Gradle DSL.
+
+For detailed information on getting started with this plugin and how to configure specific AWS services, please refer to the
+documentation below.
+
+[IMPORTANT]
+This plugin requires Gradle >= 5.2 to work properly.
+
+include::01-plugin-dependencies.adoc[]
+
+include::02-getting-started.adoc[]

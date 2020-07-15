@@ -1,0 +1,97 @@
+import com.amazonaws.services.dynamodbv2.model.AttributeDefinition
+import com.amazonaws.services.dynamodbv2.model.KeySchemaElement
+import com.amazonaws.services.dynamodbv2.model.KeyType
+import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
+import com.nike.pdm.localstack.aws.dynamodb.CreateDynamoDbTableTask
+import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
+
+buildscript {
+    dependencies {
+        classpath "com.nike.pdm.localstack:gradle-localstack-plugin"
+    }
+}
+
+plugins {
+    id "java"
+    id "org.springframework.boot"           version "2.2.4.RELEASE"
+    id "io.spring.dependency-management"    version "1.0.9.RELEASE"
+    id "com.avast.gradle.docker-compose"    version "0.12.1"
+    id "org.unbroken-dome.test-sets"        version "3.0.1"
+    id "com.github.hierynomus.license"      version "0.15.0"
+}
+
+apply plugin: "com.nike.pdm.localstack"
+
+// Project Configuration
+project.group           = "com.nike.pdm.localstack"
+project.version         = "0.1.0"
+project.description     = "Example project that demonstrates the use of the Gradle LocalStack Plugin"
+
+// Version Configuration
+project.ext.awsVersion  = "1.11.447"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// Dependency Configuration
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "com.amazonaws:aws-java-sdk-dynamodb:${awsVersion}"
+    implementation "com.amazonaws:aws-java-sdk-sqs:${awsVersion}"
+}
+
+// Spring Boot Configuration
+bootRun {
+    jvmArgs = ['-Dspring.profiles.active=local']
+}
+
+// LocalStack Configuration
+dockerCompose {
+    useComposeFiles = [ 'localstack/docker-compose.yml' ]
+}
+
+localstack {
+    host = 'localhost'
+    port = 4566
+    signingRegion = 'us-east-1'
+
+    springboot {
+        profiles = [ 'local' ]
+    }
+}
+
+task setupLocalQueue(type: CreateSqsQueuesTask) {
+    queueNames = [ 'catalog-product-change-notification' ]
+    queueAttributes = [
+            VisibilityTimeout: '10'
+    ]
+}
+
+task setupLocalTable(type: CreateDynamoDbTableTask) {
+    tableName = 'catalog.products'
+    keySchema = [
+            new KeySchemaElement("id", KeyType.HASH)
+    ]
+    attributeDefinitions = [
+            new AttributeDefinition("id", ScalarAttributeType.S)
+    ]
+}
+
+task setupS3Bucket(type: CreateS3BucketsTask) {
+    buckets = [ 'catalog-product-bucket' ]
+}
+
+// Integration Test Configuration
+testSets {
+    integTest
+}
+
+// Licensing Configuration
+license {
+    header rootProject.file('codequality/LICENSE_HEADER')
+    strictCheck true
+    excludes([ "**/*.json", "**/*.yml", "**/*.yaml", "**/*.properties", "**/*.html", "**/*.js", "**/*.css",  "**/*.map"])
+}

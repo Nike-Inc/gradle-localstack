@@ -1,0 +1,4 @@
+task createAppStack(type: CreateCFStackTask) {
+    stackName = 'catalog-products-v1'
+    cfTemplate = file("cloudformation/catalog-products-resources-v1.yml")
+}

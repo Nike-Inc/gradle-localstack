@@ -1,0 +1,55 @@
+[#sqs]
+== SQS
+This plugin provides a set of tasks for working with AWS SQS in your project.
+
+=== Tasks
+The plugin provides both default and custom tasks.
+
+[options="header"]
+[cols="5,5,3,10"]
+|=======
+|Task |Task Name |Type | Description
+| link:./javadoc/com/nike/pdm/localstack/aws/sqs/CreateSqsQueuesTask.html[CreateSqsQueuesTask]|`createSqsQueues`  | Custom  | Creates SQS Queues
+| link:./javadoc/com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html[CreateSqsQueueWithDlqTask]|`createSqsQueueWithDlq`  | Custom | Creates an SQS Queue with Attached Deadletter Queue
+| link:./javadoc/com/nike/pdm/localstack/aws/sqs/ListSqsQueuesTask.html[ListSqsQueuesTask]|`listSqsQueues`   | Default | Lists all SQS Queues
+| link:./javadoc/com/nike/pdm/localstack/aws/sqs/PublishSqsTask.html[PublishSqsTask]|`publishSqs`   | Default | Publishes Messages to SQS
+| link:./javadoc/com/nike/pdm/localstack/aws/sqs/PurgeSqsQueuesTask.html[PurgeSqsQueuesTask]|`purgeSqsQueues`   | Default | Purges Messages on SQS Queues
+|=======
+
+=== Examples
+Example configurations for the SQS tasks. For information on all available task properties please refer to the link:./javadoc/index.html[Javadocs].
+
+==== Create Queues
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-sqs-createqueues/groovy/build.gradle[]
+----
+
+==== Create Queue with DLQ
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-sqs-createqueuewithdlq/groovy/build.gradle[]
+----
+
+==== List Queues
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-sqs-listqueues/bash/example.sh[]
+----
+
+==== Publish
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-sqs-publish/bash/example.sh[]
+----
+
+==== Purge Queues
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-sqs-purgequeues/bash/example.sh[]
+----

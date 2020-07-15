@@ -1,0 +1,9 @@
+task setupLocalTable(type: CreateDynamoDbTableTask) {
+    tableName = 'catalog.products'
+    keySchema = [
+            new KeySchemaElement("id", KeyType.HASH)
+    ]
+    attributeDefinitions = [
+            new AttributeDefinition("id", ScalarAttributeType.S)
+    ]
+}

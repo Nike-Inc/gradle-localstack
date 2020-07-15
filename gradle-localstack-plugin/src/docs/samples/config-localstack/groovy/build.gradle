@@ -1,0 +1,6 @@
+localstack {
+    workingDir = file('/localstack')
+    host = 'localhost'
+    port = 4566
+    signingRegion = 'us-east-1'
+}

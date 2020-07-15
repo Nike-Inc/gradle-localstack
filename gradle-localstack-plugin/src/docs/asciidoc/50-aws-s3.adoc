@@ -1,0 +1,47 @@
+[#s3]
+== S3
+This plugin provides a set of tasks for working with AWS S3 in your project.
+
+=== Tasks
+The plugin provides both default and custom tasks.
+
+[options="header"]
+[cols="5,5,3,10"]
+|=======
+|Task |Task Name |Type | Description
+| link:./javadoc/com/nike/pdm/localstack/aws/s3/CreateS3BucketsTask.html[CreateS3BucketsTask]|`createS3Buckets`  | Custom  | Creates S3 Buckets
+| link:./javadoc/com/nike/pdm/localstack/aws/s3/DeleteS3BucketsTask.html[DeleteS3BucketsTask]|`deleteS3Buckets`  | Default | Deletes S3 Buckets
+| link:./javadoc/com/nike/pdm/localstack/aws/s3/ListS3BucketsTask.html[ListS3BucketsTask]|`listS3Buckets`   | Default | Lists all S3 Buckets
+| link:./javadoc/com/nike/pdm/localstack/aws/s3/PurgeS3BucketsTask.html[PurgeS3BucketsTask]|`purgeS3Buckets`   | Default | Purges Objects from S3 Buckets
+|=======
+
+=== Examples
+Example configurations for the S3 tasks. For information on all available task properties please refer to the link:./javadoc/index.html[Javadocs].
+
+==== Create Buckets
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-s3-createbuckets/groovy/build.gradle[]
+----
+
+==== Delete Buckets
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-s3-deletebuckets/bash/example.sh[]
+----
+
+==== List Buckets
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-s3-listbuckets/bash/example.sh[]
+----
+
+==== Purge Buckets
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-s3-purgebuckets/bash/example.sh[]
+----

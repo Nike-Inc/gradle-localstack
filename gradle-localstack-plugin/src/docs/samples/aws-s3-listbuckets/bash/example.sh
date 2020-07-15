@@ -1,0 +1,1 @@
+./gradlew listS3Buckets
