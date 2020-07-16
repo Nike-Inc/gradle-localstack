@@ -7,7 +7,6 @@
  */
 package com.nike.pdm.localstack.compose
 
-
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -15,8 +14,9 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import static org.junit.Assert.assertTrue
 
-class StartLocalStackFunctionalTest extends Specification {
+class StopLocalStackFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -29,13 +29,14 @@ class StartLocalStackFunctionalTest extends Specification {
 
         testProjectDir.newFolder('localstack')
         composeFile = testProjectDir.newFile('localstack/localstack-docker-compose.yml')
+
     }
 
     def cleanup() {
         dockerTestUtil.killLocalStack()
     }
 
-    def "task should start localstack"() {
+    def "task should stop running localstack"() {
         given:
         buildFile << """
             plugins {
@@ -79,13 +80,23 @@ class StartLocalStackFunctionalTest extends Specification {
         """
 
         when:
+        def startResult = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('startLocalStack', '--stacktrace')
+                .withPluginClasspath()
+                .build()
+
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('startLocalStack')
+                .withArguments('stopLocalStack', '--stacktrace')
                 .withPluginClasspath()
                 .build()
 
         then:
-        result.task(":startLocalStack").outcome == SUCCESS
+        startResult.task(":startLocalStack").outcome == SUCCESS
+        result.task(":stopLocalStack").outcome == SUCCESS
+
+        // Compose file should not be deleted on "stopLocalStack"
+        assertTrue(composeFile.exists())
     }
 }
