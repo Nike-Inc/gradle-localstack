@@ -68,7 +68,7 @@ class InitLocalStackFunctionalTest extends Specification {
         when:
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('initLocalStack --stacktrace')
+                .withArguments('initLocalStack')
                 .withPluginClasspath()
                 .build()
 
