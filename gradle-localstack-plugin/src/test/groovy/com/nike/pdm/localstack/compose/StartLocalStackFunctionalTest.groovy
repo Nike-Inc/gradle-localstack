@@ -7,7 +7,6 @@
  */
 package com.nike.pdm.localstack.compose
 
-
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
