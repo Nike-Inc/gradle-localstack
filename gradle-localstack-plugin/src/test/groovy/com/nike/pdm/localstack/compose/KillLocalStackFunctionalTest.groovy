@@ -16,7 +16,7 @@ import spock.lang.Specification
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import static org.junit.Assert.assertTrue
 
-class StopLocalStackFunctionalTest extends Specification {
+class KillLocalStackFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -29,7 +29,6 @@ class StopLocalStackFunctionalTest extends Specification {
 
         testProjectDir.newFolder('localstack')
         composeFile = testProjectDir.newFile('localstack/localstack-docker-compose.yml')
-
     }
 
     def cleanup() {
@@ -88,15 +87,15 @@ class StopLocalStackFunctionalTest extends Specification {
 
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('stopLocalStack', '--stacktrace')
+                .withArguments('killLocalStack', '--stacktrace')
                 .withPluginClasspath()
                 .build()
 
         then:
         startResult.task(":startLocalStack").outcome == SUCCESS
-        result.task(":stopLocalStack").outcome == SUCCESS
+        result.task(":killLocalStack").outcome == SUCCESS
 
-        // .localstack directory should not be deleted on "stopLocalStack"
-        assertTrue(new File(testProjectDir.root.path +"/localstack/.localstack").exists())
+        // .localstack directory should be deleted on "killLocalStack"
+        assertTrue(!new File(testProjectDir.root.path +"/localstack/.localstack").exists())
     }
 }
