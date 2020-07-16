@@ -1,5 +1,14 @@
+/*
+ * Copyright 2020-present, Nike, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the Apache-2.0 license found in
+ * the LICENSE file in the root directory of this source tree.
+ */
 package com.nike.pdm.localstack.compose
 
+
+import com.nike.pdm.localstack.DockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
@@ -13,11 +22,17 @@ class StartLocalStackFunctionalTest extends Specification {
     File buildFile
     File composeFile
 
+    DockerTestUtil dockerTestUtil = new DockerTestUtil()
+
     def setup() {
         buildFile = testProjectDir.newFile('build.gradle')
 
         testProjectDir.newFolder('localstack')
         composeFile = testProjectDir.newFile('localstack/localstack-docker-compose.yml')
+    }
+
+    def cleanup() {
+        dockerTestUtil.killLocalStack()
     }
 
     def "task should start localstack"() {
@@ -43,6 +58,7 @@ class StartLocalStackFunctionalTest extends Specification {
             services:
               localstack:
                 image: localstack/localstack:0.11.0
+                container_name: gradle-localstack-plugin-test
                 ports:
                   - '4566:4566'   # LocalStack Edge
                   - '8055:8080'   # LocalStack Console
