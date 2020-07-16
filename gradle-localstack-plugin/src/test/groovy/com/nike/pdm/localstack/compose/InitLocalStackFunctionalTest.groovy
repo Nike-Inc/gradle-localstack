@@ -15,7 +15,7 @@ import spock.lang.Specification
 import static org.gradle.testkit.runner.TaskOutcome.*
 import static org.junit.Assert.*
 
-class InitLocalStackTaskFunctionalTest extends Specification {
+class InitLocalStackFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
