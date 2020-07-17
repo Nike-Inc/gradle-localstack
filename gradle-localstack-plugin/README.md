@@ -21,7 +21,7 @@ Run the following command to build the documentation for the plugin:
 ### Running Functional Tests
 Run the following command to execute the functional tests:
 
-    ./gradlew funcTests
+    ./gradlew funcTest
 
 ## Usage
 ### Plugin Dependencies
