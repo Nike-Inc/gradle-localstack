@@ -1,11 +1,4 @@
-/*
- * Copyright 2020-present, Nike, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the Apache-2.0 license found in
- * the LICENSE file in the root directory of this source tree.
- */
-package com.nike.pdm.localstack.aws
+package com.nike.pdm.localstack.aws.cloudformation
 
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
@@ -15,7 +8,7 @@ import spock.lang.Specification
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
-class CreateCFStackFunctionalTest extends Specification {
+class ListCFStacksFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -38,7 +31,7 @@ class CreateCFStackFunctionalTest extends Specification {
         dockerTestUtil.killLocalStack()
     }
 
-    def "should create cloudformation stack"() {
+    def "should list cloudformation stack"() {
         given:
         buildFile << """
             import com.nike.pdm.localstack.aws.cloudformation.CreateCFStackTask
@@ -115,13 +108,20 @@ class CreateCFStackFunctionalTest extends Specification {
         """
 
         when:
-        def result = GradleRunner.create()
+        def createResult = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
                 .withArguments('createStack')
                 .withPluginClasspath()
                 .build()
 
+        def listResult = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('listCFStacks')
+                .withPluginClasspath()
+                .build()
+
         then:
-        result.task(":createStack").outcome == SUCCESS
+        listResult.task(":listCFStacks").outcome == SUCCESS
+        listResult.output.contains("test-stack")
     }
 }
