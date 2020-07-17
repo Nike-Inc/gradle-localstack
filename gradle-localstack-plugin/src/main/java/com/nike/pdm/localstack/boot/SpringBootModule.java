@@ -9,7 +9,6 @@ package com.nike.pdm.localstack.boot;
 
 import com.nike.pdm.localstack.compose.LocalStackExtension;
 import com.nike.pdm.localstack.compose.LocalStackModule;
-import com.nike.pdm.localstack.core.LocalStackDir;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.JavaPluginConvention;
 import org.gradle.api.tasks.SourceSet;
