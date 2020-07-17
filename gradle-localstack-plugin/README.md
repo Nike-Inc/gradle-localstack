@@ -18,6 +18,11 @@ Run the following command to build the documentation for the plugin:
 
     ./gradlew buildDocSite
 
+### Running Functional Tests
+Run the following command to execute the functional tests:
+
+    ./gradlew funcTests
+
 ## Usage
 ### Plugin Dependencies
 This plugin requires the following plugins to be applied to the project in order for it to function:

@@ -19,6 +19,7 @@ import com.nike.pdm.localstack.compose.LocalStackModule;
 import com.nike.pdm.localstack.core.ConsoleLogger;
 import com.nike.pdm.localstack.core.Retry;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.GradleException;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
@@ -50,7 +51,7 @@ public class DeleteS3BucketsTask extends DefaultTask {
 
     @TaskAction
     public void run() {
-        final Set<Class<? extends Throwable>> expectedErrors = new HashSet<>(Arrays.asList(IllegalArgumentException.class));
+        final Set<Class<? extends Throwable>> expectedErrors = new HashSet<>(Arrays.asList(GradleException.class));
 
         Retry.execute(() -> {
             final AmazonS3 amazonS3 = AwsClientFactory.getInstance().s3(getProject());
@@ -66,7 +67,7 @@ public class DeleteS3BucketsTask extends DefaultTask {
                         while (objIter.hasNext()) {
                             // Only delete buckets that contain objects/versions if the force parameter is true
                             if (!force) {
-                                throw new IllegalArgumentException("Bucket is not empty and the 'force' parameter is set to 'false': " + bucketName);
+                                throw new GradleException("Bucket is not empty and the 'force' parameter is set to 'false': " + bucketName);
                             }
 
                             amazonS3.deleteObject(bucketName, objIter.next().getKey());
@@ -87,7 +88,7 @@ public class DeleteS3BucketsTask extends DefaultTask {
                             while (versionIter.hasNext()) {
                                 // Only delete buckets that contain objects/versions if the force parameter is true
                                 if (!force) {
-                                    throw new IllegalArgumentException("Bucket is not empty and the 'force' parameter is set to 'false': " + bucketName);
+                                    throw new GradleException("Bucket is not empty and the 'force' parameter is set to 'false': " + bucketName);
                                 }
 
                                 S3VersionSummary vs = versionIter.next();

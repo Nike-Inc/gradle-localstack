@@ -11,11 +11,11 @@ import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
+import org.gradle.testkit.runner.UnexpectedBuildFailure
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-import static org.gradle.testkit.runner.TaskOutcome.FAILED
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 class DeleteS3BucketsFunctionalTest extends Specification {
@@ -247,8 +247,7 @@ class DeleteS3BucketsFunctionalTest extends Specification {
                 .build()
 
         then:
-        deleteResult.task(":deleteS3Buckets").outcome == FAILED
-        deleteResult.output.contains("Bucket is not empty and the 'force' parameter is set to 'false': catalog-product-bucket")
+        thrown(UnexpectedBuildFailure)
     }
 
     def "should force delete non-empty bucket"() {
