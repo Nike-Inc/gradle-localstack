@@ -99,6 +99,7 @@ class CreateDynamoDbTableFunctionalTest extends Specification {
                 .withArguments('startLocalStack', 'setupLocalTable')
                 .withPluginClasspath()
                 .build()
+
         then:
         result.task(":setupLocalTable").outcome == SUCCESS
     }

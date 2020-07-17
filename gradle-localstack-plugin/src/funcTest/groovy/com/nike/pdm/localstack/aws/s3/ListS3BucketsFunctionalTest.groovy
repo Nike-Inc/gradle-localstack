@@ -5,7 +5,7 @@
  * This source code is licensed under the Apache-2.0 license found in
  * the LICENSE file in the root directory of this source tree.
  */
-package com.nike.pdm.localstack.aws.dynamodb
+package com.nike.pdm.localstack.aws.s3
 
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
@@ -15,7 +15,7 @@ import spock.lang.Specification
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
-class ListDynamoDbTablesFunctionalTest extends Specification {
+class ListS3BucketsFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -34,14 +34,10 @@ class ListDynamoDbTablesFunctionalTest extends Specification {
         dockerTestUtil.killLocalStack()
     }
 
-    def "should list dynamodb tables"() {
+    def "should list s3 buckets"() {
         given:
         buildFile << """
-            import com.amazonaws.services.dynamodbv2.model.AttributeDefinition
-            import com.amazonaws.services.dynamodbv2.model.KeySchemaElement
-            import com.amazonaws.services.dynamodbv2.model.KeyType
-            import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
-            import com.nike.pdm.localstack.aws.dynamodb.CreateDynamoDbTableTask
+            import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
 
             plugins {
                 id "java"
@@ -56,13 +52,10 @@ class ListDynamoDbTablesFunctionalTest extends Specification {
                 useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
             }
             
-            task setupLocalTable(type: CreateDynamoDbTableTask) {
-                tableName = 'catalog.products'
-                keySchema = [
-                        new KeySchemaElement("id", KeyType.HASH)
-                ]
-                attributeDefinitions = [
-                        new AttributeDefinition("id", ScalarAttributeType.S)
+            task setupS3Buckets(type: CreateS3BucketsTask) {
+                buckets = [ 
+                    'catalog-product-bucket',
+                    'catalog-pricing-bucket'
                 ]
             }
         """
@@ -94,20 +87,15 @@ class ListDynamoDbTablesFunctionalTest extends Specification {
         """
 
         when:
-        def setupResult = GradleRunner.create()
+        def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('startLocalStack')
-                .withPluginClasspath()
-                .build()
-
-        def listResult = GradleRunner.create()
-                .withProjectDir(testProjectDir.root)
-                .withArguments('listDynamoDbTables')
+                .withArguments('startLocalStack', 'listS3Buckets')
                 .withPluginClasspath()
                 .build()
 
         then:
-        listResult.task(":listDynamoDbTables").outcome == SUCCESS
-        listResult.output.contains("catalog.products")
+        result.task(":listS3Buckets").outcome == SUCCESS
+        result.output.contains("catalog-product-bucket")
+        result.output.contains("catalog-pricing-bucket")
     }
 }
