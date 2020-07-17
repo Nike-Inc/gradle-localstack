@@ -8,7 +8,6 @@
 package com.nike.pdm.localstack.boot;
 
 import org.gradle.api.GradleException;
-import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Project;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.plugins.JavaApplication;

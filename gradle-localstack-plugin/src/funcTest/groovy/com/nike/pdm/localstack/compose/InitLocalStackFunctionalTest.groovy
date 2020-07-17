@@ -12,8 +12,8 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
-import static org.gradle.testkit.runner.TaskOutcome.*
-import static org.junit.Assert.*
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
+import static org.junit.Assert.assertTrue
 
 class InitLocalStackFunctionalTest extends Specification {
 
