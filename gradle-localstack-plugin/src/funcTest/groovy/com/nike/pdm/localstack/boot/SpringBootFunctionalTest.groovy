@@ -11,7 +11,11 @@ import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.Timeout
 
+import java.util.concurrent.TimeUnit
+
+@Timeout(value = 3, unit = TimeUnit.MINUTES)
 class SpringBootFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
