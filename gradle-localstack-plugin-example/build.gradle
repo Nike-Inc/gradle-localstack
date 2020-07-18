@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.model.KeyType
 import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
 import com.nike.pdm.localstack.aws.dynamodb.CreateDynamoDbTableTask
 import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+import com.nike.pdm.localstack.aws.sqs.CreateSqsQueueWithDlqTask
 import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
 
 buildscript {
@@ -63,11 +64,8 @@ localstack {
     }
 }
 
-task setupLocalQueue(type: CreateSqsQueuesTask) {
-    queueNames = [ 'catalog-product-change-notification' ]
-    queueAttributes = [
-            VisibilityTimeout: '10'
-    ]
+task setupLocalQueue(type: CreateSqsQueueWithDlqTask) {
+    queueName = 'catalog-product-change-notification'
 }
 
 task setupLocalTable(type: CreateDynamoDbTableTask) {

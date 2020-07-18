@@ -5,7 +5,7 @@
  * This source code is licensed under the Apache-2.0 license found in
  * the LICENSE file in the root directory of this source tree.
  */
-package com.nike.pdm.localstack.aws.s3
+package com.nike.pdm.localstack.aws.sqs
 
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import com.nike.pdm.localstack.util.ComposeFile
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 @Timeout(value = 3, unit = TimeUnit.MINUTES)
-class ListS3BucketsFunctionalTest extends Specification {
+class CreateSqsQueuesFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -39,10 +39,10 @@ class ListS3BucketsFunctionalTest extends Specification {
         dockerTestUtil.killLocalStack()
     }
 
-    def "should list s3 buckets"() {
+    def "should create sqs queue"() {
         given:
         buildFile << """
-            import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+            import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
 
             plugins {
                 id "java"
@@ -57,10 +57,10 @@ class ListS3BucketsFunctionalTest extends Specification {
                 useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
             }
             
-            task setupS3Buckets(type: CreateS3BucketsTask) {
-                buckets = [ 
-                    'catalog-product-bucket',
-                    'catalog-pricing-bucket'
+            task setupLocalQueue(type: CreateSqsQueuesTask) {
+                queueNames = [ 'catalog-product-change-notification' ]
+                queueAttributes = [
+                        VisibilityTimeout: '10'
                 ]
             }
         """
@@ -70,13 +70,10 @@ class ListS3BucketsFunctionalTest extends Specification {
         when:
         def result = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('startLocalStack', 'listS3Buckets')
+                .withArguments('startLocalStack', 'setupLocalQueue')
                 .withPluginClasspath()
                 .build()
-
         then:
-        result.task(":listS3Buckets").outcome == SUCCESS
-        result.output.contains("catalog-product-bucket")
-        result.output.contains("catalog-pricing-bucket")
+        result.task(":setupLocalQueue").outcome == SUCCESS
     }
 }

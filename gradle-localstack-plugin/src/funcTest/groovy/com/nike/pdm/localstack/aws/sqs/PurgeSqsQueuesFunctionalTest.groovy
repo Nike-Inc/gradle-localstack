@@ -5,8 +5,10 @@
  * This source code is licensed under the Apache-2.0 license found in
  * the LICENSE file in the root directory of this source tree.
  */
-package com.nike.pdm.localstack.aws.s3
+package com.nike.pdm.localstack.aws.sqs
 
+import com.amazonaws.client.builder.AwsClientBuilder
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import com.nike.pdm.localstack.util.ComposeFile
 import org.gradle.testkit.runner.GradleRunner
@@ -20,7 +22,7 @@ import java.util.concurrent.TimeUnit
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 @Timeout(value = 3, unit = TimeUnit.MINUTES)
-class ListS3BucketsFunctionalTest extends Specification {
+class PurgeSqsQueuesFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -39,10 +41,10 @@ class ListS3BucketsFunctionalTest extends Specification {
         dockerTestUtil.killLocalStack()
     }
 
-    def "should list s3 buckets"() {
+    def "should purge sqs queue"() {
         given:
         buildFile << """
-            import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+            import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
 
             plugins {
                 id "java"
@@ -57,26 +59,37 @@ class ListS3BucketsFunctionalTest extends Specification {
                 useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
             }
             
-            task setupS3Buckets(type: CreateS3BucketsTask) {
-                buckets = [ 
-                    'catalog-product-bucket',
-                    'catalog-pricing-bucket'
+            task setupLocalQueue(type: CreateSqsQueuesTask) {
+                queueNames = [ 'catalog-product-change-notification' ]
+                queueAttributes = [
+                        VisibilityTimeout: '10'
                 ]
             }
         """
 
         composeFile << ComposeFile.getContents()
 
+        def sqsClient = AmazonSQSClientBuilder.standard()
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration('http://localhost:4566', 'us-east-1'))
+                .build()
+
         when:
-        def result = GradleRunner.create()
+        def setupResult = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('startLocalStack', 'listS3Buckets')
+                .withArguments('startLocalStack')
+                .withPluginClasspath()
+                .build()
+
+        def queueUrl = sqsClient.getQueueUrl('catalog-product-change-notification')
+        sqsClient.sendMessage(queueUrl.getQueueUrl(), 'This is a test message')
+
+        def purgeResult = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('purgeSqsQueues', '--queueNames=catalog-product-change-notification')
                 .withPluginClasspath()
                 .build()
 
         then:
-        result.task(":listS3Buckets").outcome == SUCCESS
-        result.output.contains("catalog-product-bucket")
-        result.output.contains("catalog-pricing-bucket")
+        purgeResult.task(":purgeSqsQueues").outcome == SUCCESS
     }
 }

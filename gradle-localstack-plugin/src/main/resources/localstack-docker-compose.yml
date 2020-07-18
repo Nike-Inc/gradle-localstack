@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   localstack:
-    image: localstack/localstack:0.11.0
+    image: localstack/localstack:0.11.3
     ports:
       - '4566:4566'   # LocalStack Edge
       - '8055:8080'   # LocalStack Console

@@ -10,13 +10,18 @@ package com.nike.pdm.localstack.aws.s3
 import com.amazonaws.client.builder.AwsClientBuilder
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
+import com.nike.pdm.localstack.util.ComposeFile
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.Timeout
+
+import java.util.concurrent.TimeUnit
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
+@Timeout(value = 3, unit = TimeUnit.MINUTES)
 class PurgeS3BucketsFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
@@ -59,31 +64,7 @@ class PurgeS3BucketsFunctionalTest extends Specification {
             }
         """
 
-        composeFile << """
-            version: '3.5'
-            
-            services:
-              localstack:
-                image: localstack/localstack:0.11.0
-                container_name: gradle-localstack-plugin-test
-                ports:
-                  - '4566:4566'   # LocalStack Edge
-                  - '8055:8080'   # LocalStack Console
-                networks:
-                  - gradle-localstack-plugin-test
-                environment:
-                  - DEBUG=1
-                  - DATA_DIR=/tmp/localstack/data
-                  - AWS_ACCESS_KEY_ID=dummy
-                  - AWS_SECRET_ACCESS_KEY=dummy
-                volumes:
-                  - './.localstack:/tmp/localstack'
-                  - '/var/run/docker.sock:/var/run/docker.sock'
-                  
-            networks:
-              gradle-localstack-plugin-test:
-                name: gradle-localstack-plugin-test-network
-        """
+        composeFile << ComposeFile.getContents()
 
         def dummyFile = testProjectDir.newFile("dummy-file.txt")
         dummyFile << """
@@ -104,13 +85,13 @@ class PurgeS3BucketsFunctionalTest extends Specification {
 
         s3Client.putObject('catalog-product-bucket', dummyFile.name, dummyFile)
 
-        def deleteResult = GradleRunner.create()
+        def purgeResult = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
                 .withArguments('purgeS3Buckets', '--buckets=catalog-product-bucket')
                 .withPluginClasspath()
                 .build()
 
         then:
-        deleteResult.task(":purgeS3Buckets").outcome == SUCCESS
+        purgeResult.task(":purgeS3Buckets").outcome == SUCCESS
     }
 }

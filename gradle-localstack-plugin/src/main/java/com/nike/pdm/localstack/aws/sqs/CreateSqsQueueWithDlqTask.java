@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nike.pdm.localstack.compose.LocalStackModule;
 import com.nike.pdm.localstack.core.ConsoleLogger;
 import com.nike.pdm.localstack.core.Retry;
+import com.nike.pdm.localstack.core.annotation.LocalStackSetupTask;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Internal;
@@ -30,6 +31,7 @@ import java.util.Set;
 /**
  * Task that creates an SQS queue with an attached deadletter queue.
  */
+@LocalStackSetupTask
 public class CreateSqsQueueWithDlqTask extends DefaultTask {
 
     private static final String DEFAULT_DLQ_SUFFIX = "-dlq";
@@ -50,49 +52,70 @@ public class CreateSqsQueueWithDlqTask extends DefaultTask {
     @Input
     private Map<String, String> deadletterQueueAttributes;
 
-    public CreateSqsQueueWithDlqTask() {
-        setMustRunAfter(Arrays.asList(LocalStackModule.START_LOCALSTACK_TASK_NAME));
-    }
-
     @TaskAction
     public void run() {
-        final Set<Class<? extends Throwable>> expectedErrors = new HashSet<>(Arrays.asList(
-                IllegalArgumentException.class,
-                JsonProcessingException.class));
+        final Set<Class<? extends Throwable>> expectedErrors = new HashSet<>(Arrays.asList(JsonProcessingException.class));
 
+        // Create deadletter queue
         Retry.execute(() -> {
             final SqsTaskUtil sqsTaskUtil = new SqsTaskUtil(getProject());
             final String dlqName = getDeadletterQueueName();
 
-            if (sqsTaskUtil.queueExists(queueName)) {
-                throw new IllegalArgumentException("Queue already exists: " + queueName);
-            }
-
             if (sqsTaskUtil.queueExists(dlqName)) {
-                throw new IllegalArgumentException("Queue already exists: " + dlqName);
+                ConsoleLogger.log("DLQ already exists: %s", dlqName);
+                return null;
             }
 
             ConsoleLogger.log("Creating SQS deadletter queue: %s", dlqName);
 
             CreateQueueResult createDlqResult = sqsTaskUtil.createQueue(dlqName, deadletterQueueAttributes);
-            final String dlqArn = sqsTaskUtil.getQueueArn(createDlqResult.getQueueUrl());
-
             ConsoleLogger.log("Created SQS deadletter queue: %s", dlqName);
-            ConsoleLogger.log("Creating SQS queue: %s", queueName);
 
-            if (queueAttributes == null) {
-                queueAttributes = new HashMap<>();
+            return null;
+        });
+
+
+        // Create queue
+        Retry.execute(() -> {
+            final SqsTaskUtil sqsTaskUtil = new SqsTaskUtil(getProject());
+            final String dlqName = getDeadletterQueueName();
+            final String dlqArn = sqsTaskUtil.getQueueArnFromName(dlqName);
+
+            if (sqsTaskUtil.queueExists(queueName)) {
+                ConsoleLogger.log("Queue already exists: %s", queueName);
+
+                final String queueUrl = sqsTaskUtil.getQueueUrl(queueName);
+
+                if (queueAttributes == null) {
+                    queueAttributes = new HashMap<>();
+                }
+
+                // Setting the redrive policy on the queue
+                RedrivePolicy redrivePolicy = new RedrivePolicy();
+                redrivePolicy.setDeadLetterTargetArn(dlqArn);
+                redrivePolicy.setMaxReceiveCount("1");
+                queueAttributes.put("RedrivePolicy", MAPPER.writeValueAsString(redrivePolicy));
+
+                sqsTaskUtil.setQueueAttributes(queueUrl, queueAttributes);
+
+                ConsoleLogger.log("Updated RedrivePolicy on SQS queue: %s", queueName);
+            } else {
+                ConsoleLogger.log("Creating SQS queue: %s", queueName);
+
+                if (queueAttributes == null) {
+                    queueAttributes = new HashMap<>();
+                }
+
+                // Setting the redrive policy on the queue
+                RedrivePolicy redrivePolicy = new RedrivePolicy();
+                redrivePolicy.setDeadLetterTargetArn(dlqArn);
+                redrivePolicy.setMaxReceiveCount("1");
+                queueAttributes.put("RedrivePolicy", MAPPER.writeValueAsString(redrivePolicy));
+
+                CreateQueueResult queue = sqsTaskUtil.createQueue(queueName, queueAttributes);
+
+                ConsoleLogger.log("Created SQS queue: %s", queueName);
             }
-
-            // Setting the redrive policy on the queue
-            RedrivePolicy redrivePolicy = new RedrivePolicy();
-            redrivePolicy.setDeadLetterTargetArn(dlqArn);
-            redrivePolicy.setMaxReceiveCount("1");
-            queueAttributes.put("RedrivePolicy", MAPPER.writeValueAsString(redrivePolicy));
-
-            CreateQueueResult queue = sqsTaskUtil.createQueue(queueName, queueAttributes);
-
-            ConsoleLogger.log("Created SQS queue: %s", queueName);
 
             return null;
         }, expectedErrors);
