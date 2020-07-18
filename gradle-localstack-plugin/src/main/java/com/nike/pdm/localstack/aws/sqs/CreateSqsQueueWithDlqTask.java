@@ -12,7 +12,6 @@ import com.amazonaws.util.StringUtils;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nike.pdm.localstack.compose.LocalStackModule;
 import com.nike.pdm.localstack.core.ConsoleLogger;
 import com.nike.pdm.localstack.core.Retry;
 import com.nike.pdm.localstack.core.annotation.LocalStackSetupTask;
