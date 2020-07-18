@@ -70,6 +70,19 @@ public class SqsTaskUtil {
     }
 
     /**
+     * Returns the queue url for the queue name.
+     *
+     * @param queueName queue name
+     * @return resolved queue url
+     */
+    public String getQueueUrl(String queueName) {
+        final AmazonSQS amazonSQS = AwsClientFactory.getInstance().sqs(project);
+
+        GetQueueUrlResult queueUrlResult = amazonSQS.getQueueUrl(queueName);
+        return queueUrlResult.getQueueUrl();
+    }
+
+    /**
      * Creates an SQS queue.
      *
      * @param queueName queue name

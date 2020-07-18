@@ -1,14 +1,10 @@
-/*
- * Copyright 2020-present, Nike, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the Apache-2.0 license found in
- * the LICENSE file in the root directory of this source tree.
- */
-package com.nike.pdm.localstack.aws.s3
+package com.nike.pdm.localstack.aws.sqs
 
 import com.amazonaws.client.builder.AwsClientBuilder
-import com.amazonaws.services.s3.AmazonS3ClientBuilder
+import com.amazonaws.services.sqs.AmazonSQS
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder
+import com.amazonaws.services.sqs.model.GetQueueUrlResult
+import com.amazonaws.services.sqs.model.SendMessageResult
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -17,7 +13,8 @@ import spock.lang.Specification
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
-class PurgeS3BucketsFunctionalTest extends Specification {
+
+class PurgeSqsQueuesFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
@@ -36,10 +33,10 @@ class PurgeS3BucketsFunctionalTest extends Specification {
         dockerTestUtil.killLocalStack()
     }
 
-    def "should purge s3 bucket"() {
+    def "should purge sqs queue"() {
         given:
         buildFile << """
-            import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+            import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
 
             plugins {
                 id "java"
@@ -54,8 +51,11 @@ class PurgeS3BucketsFunctionalTest extends Specification {
                 useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
             }
             
-            task setupS3Bucket(type: CreateS3BucketsTask) {
-                buckets = [ 'catalog-product-bucket' ]
+            task setupLocalQueue(type: CreateSqsQueuesTask) {
+                queueNames = [ 'catalog-product-change-notification' ]
+                queueAttributes = [
+                        VisibilityTimeout: '10'
+                ]
             }
         """
 
@@ -85,14 +85,8 @@ class PurgeS3BucketsFunctionalTest extends Specification {
                 name: gradle-localstack-plugin-test-network
         """
 
-        def dummyFile = testProjectDir.newFile("dummy-file.txt")
-        dummyFile << """
-            File for testing the S3 plugin tasks.
-        """
-
-        def s3Client = AmazonS3ClientBuilder.standard()
+        def sqsClient = AmazonSQSClientBuilder.standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration('http://localhost:4566', 'us-east-1'))
-                .withPathStyleAccessEnabled(true)
                 .build()
 
         when:
@@ -102,15 +96,16 @@ class PurgeS3BucketsFunctionalTest extends Specification {
                 .withPluginClasspath()
                 .build()
 
-        s3Client.putObject('catalog-product-bucket', dummyFile.name, dummyFile)
+        def queueUrl = sqsClient.getQueueUrl('catalog-product-change-notification')
+        sqsClient.sendMessage(queueUrl.getQueueUrl(), 'This is a test message')
 
         def purgeResult = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('purgeS3Buckets', '--buckets=catalog-product-bucket')
+                .withArguments('purgeSqsQueues', '--queueNames=catalog-product-change-notification')
                 .withPluginClasspath()
                 .build()
 
         then:
-        purgeResult.task(":purgeS3Buckets").outcome == SUCCESS
+        purgeResult.task(":purgeSqsQueues").outcome == SUCCESS
     }
 }
