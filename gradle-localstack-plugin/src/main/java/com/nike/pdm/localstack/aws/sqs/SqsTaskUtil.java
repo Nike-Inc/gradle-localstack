@@ -14,7 +14,6 @@ import com.amazonaws.services.sqs.model.GetQueueAttributesRequest;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.QueueDoesNotExistException;
-import com.amazonaws.services.sqs.model.SetQueueAttributesResult;
 import com.amazonaws.util.StringUtils;
 import com.nike.pdm.localstack.aws.AwsClientFactory;
 import org.gradle.api.Project;
