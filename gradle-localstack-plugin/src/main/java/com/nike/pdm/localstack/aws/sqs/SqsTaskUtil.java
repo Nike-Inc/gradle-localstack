@@ -14,6 +14,7 @@ import com.amazonaws.services.sqs.model.GetQueueAttributesRequest;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.QueueDoesNotExistException;
+import com.amazonaws.services.sqs.model.SetQueueAttributesResult;
 import com.amazonaws.util.StringUtils;
 import com.nike.pdm.localstack.aws.AwsClientFactory;
 import org.gradle.api.Project;
@@ -102,7 +103,7 @@ public class SqsTaskUtil {
     }
 
     /**
-     * Gets the ARN of an SQS queue based on it's queue url.
+     * Gets the ARN of an SQS queue based on its queue url.
      *
      * @param queueUrl sqs queue url
      * @return queue arn
@@ -115,7 +116,18 @@ public class SqsTaskUtil {
     }
 
     /**
-     * Gets the name of a queue from it's queue url.
+     * Gets the ARN of an SQS queue based on its queue name.
+     *
+     * @param queueName queue name
+     * @return queue arn
+     */
+    public String getQueueArnFromName(String queueName) {
+        final String queueUrl = getQueueUrl(queueName);
+        return getQueueArn(queueUrl);
+    }
+
+    /**
+     * Gets the name of a queue from its queue url.
      *
      * @param queueUrl queue url
      * @return the name of the queue or an empty string if the queue url is not valid.
@@ -155,5 +167,17 @@ public class SqsTaskUtil {
 
         GetQueueAttributesResult queueAttributes = amazonSQS.getQueueAttributes(queueUrl, Arrays.asList(attributeName));
         return queueAttributes.getAttributes().get("attributeName");
+    }
+
+    /**
+     * Sets the specified attributes on the queue.
+     *
+     * @param queueUrl queue url
+     * @param attributes queue attributes
+     */
+    public void setQueueAttributes(String queueUrl, Map<String, String> attributes) {
+        final AmazonSQS amazonSQS = AwsClientFactory.getInstance().sqs(project);
+
+        amazonSQS.setQueueAttributes(queueUrl, attributes);
     }
 }

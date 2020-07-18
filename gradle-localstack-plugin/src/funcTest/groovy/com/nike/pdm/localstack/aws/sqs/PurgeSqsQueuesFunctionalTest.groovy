@@ -8,11 +8,9 @@
 package com.nike.pdm.localstack.aws.sqs
 
 import com.amazonaws.client.builder.AwsClientBuilder
-import com.amazonaws.services.sqs.AmazonSQS
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
-import com.amazonaws.services.sqs.model.GetQueueUrlResult
-import com.amazonaws.services.sqs.model.SendMessageResult
 import com.nike.pdm.localstack.LocalStackDockerTestUtil
+import com.nike.pdm.localstack.util.ComposeFile
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
@@ -69,31 +67,7 @@ class PurgeSqsQueuesFunctionalTest extends Specification {
             }
         """
 
-        composeFile << """
-            version: '3.5'
-            
-            services:
-              localstack:
-                image: localstack/localstack:0.11.0
-                container_name: gradle-localstack-plugin-test
-                ports:
-                  - '4566:4566'   # LocalStack Edge
-                  - '8055:8080'   # LocalStack Console
-                networks:
-                  - gradle-localstack-plugin-test
-                environment:
-                  - DEBUG=1
-                  - DATA_DIR=/tmp/localstack/data
-                  - AWS_ACCESS_KEY_ID=dummy
-                  - AWS_SECRET_ACCESS_KEY=dummy
-                volumes:
-                  - './.localstack:/tmp/localstack'
-                  - '/var/run/docker.sock:/var/run/docker.sock'
-                  
-            networks:
-              gradle-localstack-plugin-test:
-                name: gradle-localstack-plugin-test-network
-        """
+        composeFile << ComposeFile.getContents()
 
         def sqsClient = AmazonSQSClientBuilder.standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration('http://localhost:4566', 'us-east-1'))
