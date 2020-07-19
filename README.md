@@ -7,7 +7,9 @@ as well as tasks for easily integrating Spring Boot with LocalStack, using simpl
 ## Plugin Dependencies
 This plugin requires the following plugins to be applied to the project in order for it to function:
 
-1. [com.avast.gradle.docker-compose](https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose) - Avast Docker-Compose Gradle Plugin
+| Plugin Id | Description |
+| --------- | ----------- |
+| [com.avast.gradle.docker-compose](https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose) | Avast Docker-Compose Gradle Plugin
 
 ## Getting Started
 The plugin can be applied with the `buildscript` syntax or the plugin DSL.
@@ -34,8 +36,7 @@ plugins {
 ```
 
 ### Documentation
-For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide]().
+For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](gradle-localstack-plugin/docsite/index.html).
 
 ### Example
-Please refer to the included sample project, [gradle-localstack-plugin-example](gradle-localstack-plugin-example), for a simple
-demonstration on applying and configuring the plugin.
+Please refer to the included sample project, [gradle-localstack-plugin-example](gradle-localstack-plugin-example), for a simple demonstration on applying and configuring the plugin.
