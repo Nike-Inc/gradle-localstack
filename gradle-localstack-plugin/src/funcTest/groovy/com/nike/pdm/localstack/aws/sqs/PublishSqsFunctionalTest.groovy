@@ -20,11 +20,12 @@ import java.util.concurrent.TimeUnit
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 @Timeout(value = 3, unit = TimeUnit.MINUTES)
-class CreateSqsQueuesFunctionalTest extends Specification {
+class PublishSqsFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
     File composeFile
+    File messageFile
 
     LocalStackDockerTestUtil dockerTestUtil = new LocalStackDockerTestUtil()
 
@@ -33,13 +34,15 @@ class CreateSqsQueuesFunctionalTest extends Specification {
 
         testProjectDir.newFolder('localstack')
         composeFile = testProjectDir.newFile('localstack/localstack-docker-compose.yml')
+
+        messageFile = testProjectDir.newFile('message.json')
     }
 
     def cleanup() {
         dockerTestUtil.killLocalStack()
     }
 
-    def "should create sqs queue"() {
+    def "should publish message to sqs queue"() {
         given:
         buildFile << """
             import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
@@ -67,14 +70,22 @@ class CreateSqsQueuesFunctionalTest extends Specification {
 
         composeFile << ComposeFile.getContents()
 
+        messageFile << "{ \"productId\": \"12345\" }"
+
         when:
-        def result = GradleRunner.create()
+        def setupResult = GradleRunner.create()
                 .withProjectDir(testProjectDir.root)
-                .withArguments('startLocalStack', 'setupLocalQueue')
+                .withArguments('startLocalStack')
+                .withPluginClasspath()
+                .build()
+
+        def publishResult = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('publishSqs', '--queueNames=catalog-product-change-notification', '--message=\"' + messageFile.path + '\"')
                 .withPluginClasspath()
                 .build()
 
         then:
-        result.task(":setupLocalQueue").outcome == SUCCESS
+        publishResult.task(":publishSqs").outcome == SUCCESS
     }
 }

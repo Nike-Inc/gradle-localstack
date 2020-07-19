@@ -70,6 +70,7 @@ class CreateSqsQueueWithDlqFunctionalTest extends Specification {
                 .withArguments('startLocalStack', 'setupLocalQueue')
                 .withPluginClasspath()
                 .build()
+
         then:
         result.task(":setupLocalQueue").outcome == SUCCESS
     }
