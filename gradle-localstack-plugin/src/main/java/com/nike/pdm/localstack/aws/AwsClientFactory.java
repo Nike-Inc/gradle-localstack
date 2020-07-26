@@ -14,6 +14,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.nike.pdm.localstack.compose.LocalStackExtension;
@@ -29,6 +31,7 @@ public final class AwsClientFactory {
     private volatile AmazonDynamoDB dynamoDbClient;
     private volatile AmazonS3 amazonS3Client;
     private volatile AmazonSQS amazonSqsClient;
+    private volatile AmazonSNS amazonSnsClient;
 
     private AwsClientFactory() {
         // Noop
@@ -126,6 +129,30 @@ public final class AwsClientFactory {
                     project.getLogger().debug("Creating new aws sqs client");
 
                     amazonSqsClient = ref = AmazonSQSClientBuilder.standard()
+                            .withEndpointConfiguration(endpointConfiguration(project))
+                            .build();
+                }
+            }
+        }
+
+        return ref;
+    }
+
+    /**
+     * Gets a client for the AWS SNS service.
+     *
+     * @param project gradle project
+     * @return aws client
+     */
+    public AmazonSNS sns(Project project) {
+        AmazonSNS ref = amazonSnsClient;
+        if (ref == null) {
+            synchronized (this) {
+                ref = amazonSnsClient;
+                if (ref == null) {
+                    project.getLogger().debug("Creating new aws sns client");
+
+                    amazonSnsClient = ref = AmazonSNSClientBuilder.standard()
                             .withEndpointConfiguration(endpointConfiguration(project))
                             .build();
                 }
