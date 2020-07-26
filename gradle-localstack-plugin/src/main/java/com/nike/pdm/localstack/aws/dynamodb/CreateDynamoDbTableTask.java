@@ -72,7 +72,7 @@ public class CreateDynamoDbTableTask extends DefaultTask {
 
     @Optional
     @Input
-    private DynamoDbTableInitializer initializer;
+    private String initializer;
 
     @TaskAction
     public void run() {
@@ -122,6 +122,11 @@ public class CreateDynamoDbTableTask extends DefaultTask {
 
             return null;
         }, expectedErrors);
+
+        if (initializer != null) {
+            DynamoDbInitializerExecutor executor = new DynamoDbInitializerExecutor(getProject());
+            executor.invoke(tableName, initializer);
+        }
     }
 
     @Internal
@@ -283,18 +288,18 @@ public class CreateDynamoDbTableTask extends DefaultTask {
     /**
      * Gets the initializer used to populate the table for testing.
      *
-     * @return initializer
+     * @return fully-qualified class name of the initializer
      */
-    public DynamoDbTableInitializer getInitializer() {
+    public String getInitializer() {
         return initializer;
     }
 
     /**
      * Sets the initializer used to populate the table for testing.
      *
-     * @param initializer initializer
+     * @param className fully-qualified class name of the initializer
      */
-    public void setInitializer(DynamoDbTableInitializer initializer) {
+    public void setInitializer(String className) {
         this.initializer = initializer;
     }
 }
