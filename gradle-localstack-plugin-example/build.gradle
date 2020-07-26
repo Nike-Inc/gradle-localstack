@@ -41,6 +41,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "com.amazonaws:aws-java-sdk-dynamodb:${awsVersion}"
     implementation "com.amazonaws:aws-java-sdk-sqs:${awsVersion}"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
 // Spring Boot Configuration
@@ -85,6 +87,11 @@ task setupS3Bucket(type: CreateS3BucketsTask) {
 // Integration Test Configuration
 testSets {
     integTest
+}
+
+integTest {
+    dependsOn('startLocalStack')
+    finalizedBy('killLocalStack')
 }
 
 // Licensing Configuration
