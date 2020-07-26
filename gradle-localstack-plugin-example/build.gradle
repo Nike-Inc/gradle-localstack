@@ -69,13 +69,13 @@ task setupLocalQueue(type: CreateSqsQueueWithDlqTask) {
 
 task setupLocalTable(type: CreateDynamoDbTableTask) {
     tableName = 'catalog.products'
-    initializer = 'example.buildsrc.dynamodb.ProductTableInitializer'
     keySchema = [
             new KeySchemaElement("id", KeyType.HASH)
     ]
     attributeDefinitions = [
             new AttributeDefinition("id", ScalarAttributeType.S)
     ]
+    initializer = 'example.buildsrc.dynamodb.ProductTableInitializer'
 }
 
 task setupS3Bucket(type: CreateS3BucketsTask) {
