@@ -70,6 +70,10 @@ public class CreateDynamoDbTableTask extends DefaultTask {
     @Input
     private StreamSpecification streamSpecification;
 
+    @Optional
+    @Input
+    private String initializer;
+
     @TaskAction
     public void run() {
         final Set<Class<? extends Throwable>> expectedErrors = new HashSet<>(Arrays.asList(IllegalArgumentException.class));
@@ -115,6 +119,11 @@ public class CreateDynamoDbTableTask extends DefaultTask {
             CreateTableResult createTableResult = amazonDynamoDB.createTable(createTableRequest);
 
             ConsoleLogger.log("Created DynamoDB table: %s", tableName);
+
+            if (initializer != null) {
+                DynamoDbInitializerExecutor executor = new DynamoDbInitializerExecutor(getProject());
+                executor.invoke(tableName, initializer);
+            }
 
             return null;
         }, expectedErrors);
@@ -274,5 +283,13 @@ public class CreateDynamoDbTableTask extends DefaultTask {
      */
     public void setStreamSpecification(StreamSpecification streamSpecification) {
         this.streamSpecification = streamSpecification;
+    }
+
+    public String getInitializer() {
+        return initializer;
+    }
+
+    public void setInitializer(String initializer) {
+        this.initializer = initializer;
     }
 }

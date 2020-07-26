@@ -1,0 +1,18 @@
+plugins {
+    id "idea"
+    id "java"
+}
+
+// Version Configuration
+project.ext.awsVersion  = "1.11.447"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// Dependency Configuration
+dependencies {
+    implementation "com.amazonaws:aws-java-sdk-dynamodb:${awsVersion}"
+    implementation "org.apache.commons:commons-lang3:3.11"
+}

@@ -5,7 +5,6 @@ import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
 import com.nike.pdm.localstack.aws.dynamodb.CreateDynamoDbTableTask
 import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
 import com.nike.pdm.localstack.aws.sqs.CreateSqsQueueWithDlqTask
-import com.nike.pdm.localstack.aws.sqs.CreateSqsQueuesTask
 
 buildscript {
     dependencies {
@@ -76,6 +75,7 @@ task setupLocalTable(type: CreateDynamoDbTableTask) {
     attributeDefinitions = [
             new AttributeDefinition("id", ScalarAttributeType.S)
     ]
+    initializer = 'example.buildsrc.dynamodb.ProductTableInitializer'
 }
 
 task setupS3Bucket(type: CreateS3BucketsTask) {
