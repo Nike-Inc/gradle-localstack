@@ -72,7 +72,7 @@ final class DynamoDbInitializerExecutor {
             runMethod.invoke(initializerInstance);
         } catch (Exception e) {
             ConsoleLogger.log("Initialization failed: %s", e.getMessage());
-            throw new RuntimeException("Initializer failed!", e);
+            throw new RuntimeException("Initialization failed", e);
         }
 
         ConsoleLogger.log("Initialized table: %s", tableName);
