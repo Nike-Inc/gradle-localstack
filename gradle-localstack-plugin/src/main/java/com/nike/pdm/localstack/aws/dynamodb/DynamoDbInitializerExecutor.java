@@ -33,7 +33,7 @@ final class DynamoDbInitializerExecutor {
      * @param initializerClassName fully-qualified class name of the table initializer
      */
     public void invoke(String tableName, String initializerClassName) {
-        ConsoleLogger.log("Initializing '%s' table", tableName);
+        ConsoleLogger.log("Initializing table: %s", tableName);
 
         // Get the initializer class
         Class<?> clazz;
@@ -71,10 +71,10 @@ final class DynamoDbInitializerExecutor {
         try {
             runMethod.invoke(initializerInstance);
         } catch (Exception e) {
-            ConsoleLogger.log("Initializer failed!");
+            ConsoleLogger.log("Initialization failed: %s", e.getMessage());
             throw new RuntimeException("Initializer failed!", e);
         }
 
-        ConsoleLogger.log("Table '%s' initialized", tableName);
+        ConsoleLogger.log("Initialized table: %s", tableName);
     }
 }

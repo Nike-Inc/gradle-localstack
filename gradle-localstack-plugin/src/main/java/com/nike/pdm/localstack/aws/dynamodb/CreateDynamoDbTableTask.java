@@ -120,13 +120,13 @@ public class CreateDynamoDbTableTask extends DefaultTask {
 
             ConsoleLogger.log("Created DynamoDB table: %s", tableName);
 
+            if (initializer != null) {
+                DynamoDbInitializerExecutor executor = new DynamoDbInitializerExecutor(getProject());
+                executor.invoke(tableName, initializer);
+            }
+
             return null;
         }, expectedErrors);
-
-        if (initializer != null) {
-            DynamoDbInitializerExecutor executor = new DynamoDbInitializerExecutor(getProject());
-            executor.invoke(tableName, initializer);
-        }
     }
 
     @Internal
@@ -285,21 +285,11 @@ public class CreateDynamoDbTableTask extends DefaultTask {
         this.streamSpecification = streamSpecification;
     }
 
-    /**
-     * Gets the initializer used to populate the table for testing.
-     *
-     * @return fully-qualified class name of the initializer
-     */
     public String getInitializer() {
         return initializer;
     }
 
-    /**
-     * Sets the initializer used to populate the table for testing.
-     *
-     * @param className fully-qualified class name of the initializer
-     */
-    public void setInitializer(String className) {
+    public void setInitializer(String initializer) {
         this.initializer = initializer;
     }
 }

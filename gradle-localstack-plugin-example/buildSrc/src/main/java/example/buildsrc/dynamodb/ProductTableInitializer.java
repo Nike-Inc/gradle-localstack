@@ -48,7 +48,7 @@ public class ProductTableInitializer {
      * Product record to load into dynamo table.
      */
     @DynamoDBTable(tableName = "catalog.products")
-    static class Product {
+    public static class Product {
 
         @DynamoDBHashKey
         private String id;
