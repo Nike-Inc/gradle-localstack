@@ -418,6 +418,10 @@
 <dd>
 <div class="block">Gets the localstack hostname.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/dynamodb/CreateDynamoDbTableTask.html#getInitializer--">getInitializer()</a></span> - Method in class com.nike.pdm.localstack.aws.dynamodb.<a href="com/nike/pdm/localstack/aws/dynamodb/CreateDynamoDbTableTask.html" title="class in com.nike.pdm.localstack.aws.dynamodb">CreateDynamoDbTableTask</a></dt>
+<dd>
+<div class="block">Gets the fully-qualified class name of the table initializer to run on setup.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/AwsClientFactory.html#getInstance--">getInstance()</a></span> - Static method in class com.nike.pdm.localstack.aws.<a href="com/nike/pdm/localstack/aws/AwsClientFactory.html" title="class in com.nike.pdm.localstack.aws">AwsClientFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/boot/SpringBootExtension.html#getJvmArgs--">getJvmArgs()</a></span> - Method in class com.nike.pdm.localstack.boot.<a href="com/nike/pdm/localstack/boot/SpringBootExtension.html" title="class in com.nike.pdm.localstack.boot">SpringBootExtension</a></dt>
@@ -466,7 +470,11 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueArn-java.lang.String-">getQueueArn(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
 <dd>
-<div class="block">Gets the ARN of an SQS queue based on it's queue url.</div>
+<div class="block">Gets the ARN of an SQS queue based on its queue url.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueArnFromName-java.lang.String-">getQueueArnFromName(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
+<dd>
+<div class="block">Gets the ARN of an SQS queue based on its queue name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueAttribute-java.lang.String-java.lang.String-">getQueueAttribute(String, String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
 <dd>
@@ -486,7 +494,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueNameFromUrl-java.lang.String-">getQueueNameFromUrl(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
 <dd>
-<div class="block">Gets the name of a queue from it's queue url.</div>
+<div class="block">Gets the name of a queue from its queue url.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueuesTask.html#getQueueNames--">getQueueNames()</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueuesTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueuesTask</a></dt>
 <dd>
@@ -499,6 +507,10 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/PurgeSqsQueuesTask.html#getQueueNames--">getQueueNames()</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/PurgeSqsQueuesTask.html" title="class in com.nike.pdm.localstack.aws.sqs">PurgeSqsQueuesTask</a></dt>
 <dd>
 <div class="block">Gets the names of the queues to purge.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueUrl-java.lang.String-">getQueueUrl(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
+<dd>
+<div class="block">Returns the queue url for the queue name.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueUrls-java.util.List-">getQueueUrls(List&lt;String&gt;)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
 <dd>
@@ -907,6 +919,10 @@
 <dd>
 <div class="block">Sets the localstack hostname.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/dynamodb/CreateDynamoDbTableTask.html#setInitializer-java.lang.String-">setInitializer(String)</a></span> - Method in class com.nike.pdm.localstack.aws.dynamodb.<a href="com/nike/pdm/localstack/aws/dynamodb/CreateDynamoDbTableTask.html" title="class in com.nike.pdm.localstack.aws.dynamodb">CreateDynamoDbTableTask</a></dt>
+<dd>
+<div class="block">Sets the fully-qualified class name of the table initializer to run on setup.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/boot/SpringBootExtension.html#setJvmArgs-java.util.List-">setJvmArgs(List&lt;String&gt;)</a></span> - Method in class com.nike.pdm.localstack.boot.<a href="com/nike/pdm/localstack/boot/SpringBootExtension.html" title="class in com.nike.pdm.localstack.boot">SpringBootExtension</a></dt>
 <dd>
 <div class="block">Sets additional JVM arguments to supply to the `bootRunLocal` and `bootRunLocalDebug` tasks.</div>
@@ -962,6 +978,10 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html#setQueueAttributes-java.util.Map-">setQueueAttributes(Map&lt;String, String&gt;)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueueWithDlqTask</a></dt>
 <dd>
 <div class="block">Sets the queue attributes to apply to the created queue.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#setQueueAttributes-java.lang.String-java.util.Map-">setQueueAttributes(String, Map&lt;String, String&gt;)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
+<dd>
+<div class="block">Sets the specified attributes on the queue.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html#setQueueName-java.lang.String-">setQueueName(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueueWithDlqTask</a></dt>
 <dd>

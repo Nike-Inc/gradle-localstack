@@ -285,10 +285,20 @@ public class CreateDynamoDbTableTask extends DefaultTask {
         this.streamSpecification = streamSpecification;
     }
 
+    /**
+     * Gets the fully-qualified class name of the table initializer to run on setup.
+     *
+     * @return fully-qualified class name of table initializer
+     */
     public String getInitializer() {
         return initializer;
     }
 
+    /**
+     * Sets the fully-qualified class name of the table initializer to run on setup.
+     *
+     * @param initializer fully-qualified class name of table initializer.
+     */
     public void setInitializer(String initializer) {
         this.initializer = initializer;
     }
