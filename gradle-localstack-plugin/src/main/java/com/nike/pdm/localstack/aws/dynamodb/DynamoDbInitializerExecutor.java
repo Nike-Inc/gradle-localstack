@@ -66,5 +66,15 @@ final class DynamoDbInitializerExecutor {
         } catch (Exception e) {
             throw new RuntimeException(String.format("Unable to create instance of initializer: %s", initializerClassName), e);
         }
+
+        // Execute the initializer
+        try {
+            runMethod.invoke(initializerInstance);
+        } catch (Exception e) {
+            ConsoleLogger.log("Initializer failed!");
+            throw new RuntimeException("Initializer failed!", e);
+        }
+
+        ConsoleLogger.log("Table '%s' initialized", tableName);
     }
 }
