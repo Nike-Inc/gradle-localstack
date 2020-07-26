@@ -70,6 +70,10 @@ public class CreateDynamoDbTableTask extends DefaultTask {
     @Input
     private StreamSpecification streamSpecification;
 
+    @Optional
+    @Input
+    private DynamoDbTableInitializer initializer;
+
     @TaskAction
     public void run() {
         final Set<Class<? extends Throwable>> expectedErrors = new HashSet<>(Arrays.asList(IllegalArgumentException.class));
@@ -274,5 +278,23 @@ public class CreateDynamoDbTableTask extends DefaultTask {
      */
     public void setStreamSpecification(StreamSpecification streamSpecification) {
         this.streamSpecification = streamSpecification;
+    }
+
+    /**
+     * Gets the initializer used to populate the table for testing.
+     *
+     * @return initializer
+     */
+    public DynamoDbTableInitializer getInitializer() {
+        return initializer;
+    }
+
+    /**
+     * Sets the initializer used to populate the table for testing.
+     *
+     * @param initializer initializer
+     */
+    public void setInitializer(DynamoDbTableInitializer initializer) {
+        this.initializer = initializer;
     }
 }
