@@ -7,7 +7,6 @@
  */
 package com.nike.pdm.localstack.aws.sns;
 
-import com.nike.pdm.localstack.aws.sqs.PurgeSqsQueuesTask;
 import org.gradle.api.Project;
 
 import java.util.HashMap;

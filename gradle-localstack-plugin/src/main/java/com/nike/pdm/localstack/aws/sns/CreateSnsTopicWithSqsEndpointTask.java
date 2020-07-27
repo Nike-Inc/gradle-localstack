@@ -87,6 +87,16 @@ public class CreateSnsTopicWithSqsEndpointTask extends DefaultTask {
         });
     }
 
+    @Override
+    public String getGroup() {
+        return SnsModule.GROUP_NAME;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Creates an SNS topic with a subscribed SQS endpoint.";
+    }
+
     /**
      * Gets the name of the topic to create.
      *
