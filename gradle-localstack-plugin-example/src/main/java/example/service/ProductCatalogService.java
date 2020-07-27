@@ -35,6 +35,12 @@ public class ProductCatalogService {
     @Autowired
     private ProductChangeNotifier productChangeNotifier;
 
+    /**
+     * Adds a product.
+     *
+     * @param addProductRequest request to add product
+     * @return an {@link AddProductResult} containing info about newly created product
+     */
     public AddProductResult addProduct(AddProductRequest addProductRequest) {
         Product newProduct = new Product();
 
@@ -55,6 +61,12 @@ public class ProductCatalogService {
         return addProductResult;
     }
 
+    /**
+     * Gets a product.
+     *
+     * @param id product identifier
+     * @return a {@link GetProductResult} containing info about the product
+     */
     public GetProductResult getProduct(String id) {
         Product product = productCatalogRepository.findOne(id);
 
@@ -75,6 +87,11 @@ public class ProductCatalogService {
         }
     }
 
+    /**
+     * Deletes a product.
+     *
+     * @param id product identifier
+     */
     public void deleteProduct(String id) {
         Product product = productCatalogRepository.findOne(id);
 

@@ -39,4 +39,19 @@ public class ExampleIntegrationTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("00001", response.getBody().getId());
     }
+
+    @Test
+    public void shouldDeleteProduct() {
+        // Validate the product exists
+        ResponseEntity<GetProductResult> getResponse = testRestTemplate.getForEntity("/products/00009", GetProductResult.class);
+        assertEquals(200, getResponse.getStatusCodeValue());
+        assertEquals("00009", getResponse.getBody().getId());
+
+        // Delete the product
+        testRestTemplate.delete("/products/{id}", "00009");
+
+        // Validate that the product has been deleted
+        ResponseEntity<GetProductResult> getResponse2 = testRestTemplate.getForEntity("/products/00009", GetProductResult.class);
+        assertEquals(404, getResponse2.getStatusCodeValue());
+    }
 }

@@ -32,10 +32,21 @@ public class ProductCatalogRepository {
         return newProduct;
     }
 
+    /**
+     * Gets product by id.
+     *
+     * @param id product identifier
+     * @return product info
+     */
     public Product findOne(String id) {
         return dynamoDBMapper.load(Product.class, id);
     }
 
+    /**
+     * Deletes a product.
+     *
+     * @param product product to delete
+     */
     public void delete(Product product) {
         dynamoDBMapper.delete(product);
     }

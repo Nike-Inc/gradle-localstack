@@ -33,6 +33,12 @@ public class ProductCatalogResource {
     @Autowired
     private ProductCatalogService productCatalogService;
 
+    /**
+     * Creates a new product.
+     *
+     * @param request request to create new product
+     * @return an {@link AddProductResult} containing info about the newly created product
+     */
     @PostMapping(value = "/products",
                  consumes = MediaType.APPLICATION_JSON_VALUE,
                  produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,6 +47,12 @@ public class ProductCatalogResource {
         return ResponseEntity.ok(addProductResult);
     }
 
+    /**
+     * Gets a product.
+     *
+     * @param id product identifier
+     * @return a {@link GetProductResult} containing info about the product
+     */
     @GetMapping(value = "/products/{id}",
                 produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetProductResult> getProduct(@PathVariable("id") String id) {
@@ -53,6 +65,12 @@ public class ProductCatalogResource {
         }
     }
 
+    /**
+     * Deletes a product.
+     *
+     * @param id product identifier
+     * @return an empty http 200 response
+     */
     @DeleteMapping(value = "/products/{id}",
                    produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteProduct(@PathVariable("id") String id) {

@@ -44,6 +44,11 @@ public class ProductChangeNotifier {
         this.topicArn = topicArn;
     }
 
+    /**
+     * Sends a notification for newly added product.
+     *
+     * @param id product identifier
+     */
     public void notifyAdd(String id) {
         final ProductChangeNotification notification = new ProductChangeNotification();
         notification.setChangeType("ADD");
@@ -56,6 +61,11 @@ public class ProductChangeNotifier {
         }
     }
 
+    /**
+     * Sends a notificatioen for newly deleted product.
+     *
+     * @param id product identifier
+     */
     public void notifyDelete(String id) {
         final ProductChangeNotification notification = new ProductChangeNotification();
         notification.setChangeType("DELETE");
