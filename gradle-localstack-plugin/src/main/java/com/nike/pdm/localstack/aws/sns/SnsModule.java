@@ -16,6 +16,7 @@ public class SnsModule {
     static final String GROUP_NAME = "LocalStack - SNS";
 
     public static final String CREATE_SNS_TOPIC_WITH_QUEUE_TASK_NAME = "createSnsTopicWithSqsEndpoint";
+    public static final String LIST_SNS_TOPICS_TASK_NAME = "listSnsTopics";
 
     /**
      * Loads and configures all tasks in the SNS group.
@@ -24,6 +25,7 @@ public class SnsModule {
      */
     public static void load(Project project) {
         final Map<String, Class> tasks = new HashMap<>();
+        tasks.put(LIST_SNS_TOPICS_TASK_NAME, ListSnsTopicsTask.class);
 
         tasks.forEach((name, clazz) -> {
             // Register default tasks with the project

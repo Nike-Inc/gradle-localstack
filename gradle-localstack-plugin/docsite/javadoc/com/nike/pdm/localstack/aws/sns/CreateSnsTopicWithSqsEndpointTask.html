@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../../../com/nike/pdm/localstack/aws/sns/SnsModule.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../com/nike/pdm/localstack/aws/sns/ListSnsTopicsTask.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" target="_top">Frames</a></li>
@@ -191,27 +191,35 @@ extends org.gradle.api.DefaultTask</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#getGroup--">getGroup</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#getQueueName--">getQueueName</a></span>()</code>
 <div class="block">Gets the name of the queue to subscribe to the created topic.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#getTopicName--">getTopicName</a></span>()</code>
 <div class="block">Gets the name of the topic to create.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#run--">run</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#setQueueName-java.lang.String-">setQueueName</a></span>(java.lang.String&nbsp;queueName)</code>
 <div class="block">Sets the name of the queue to subscribe to the created topic.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#setTopicName-java.lang.String-">setTopicName</a></span>(java.lang.String&nbsp;topicName)</code>
 <div class="block">Sets the name of the topic to create.</div>
@@ -223,7 +231,7 @@ extends org.gradle.api.DefaultTask</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.gradle.api.internal.AbstractTask</h3>
-<code>appendParallelSafeAction, compareTo, configure, dependsOn, doFirst, doFirst, doFirst, doLast, doLast, doLast, finalizedBy, getActions, getAnt, getAsDynamicObject, getConvention, getDependsOn, getDescription, getDestroyables, getDidWork, getEnabled, getExtensions, getFinalizedBy, getGroup, getIdentityPath, getImpliesSubProjects, getInputs, getLocalState, getLogger, getLogging, getMustRunAfter, getName, getOnlyIf, getOutputs, getPath, getProject, getRequiredServices, getServices, getSharedResources, getShouldRunAfter, getStandardOutputCapture, getState, getTaskActions, getTaskDependencies, getTaskIdentity, getTemporaryDir, getTemporaryDirFactory, getTimeout, hasProperty, hasTaskActions, injectIntoNewInstance, isEnabled, isHasCustomActions, mustRunAfter, onlyIf, onlyIf, prependParallelSafeAction, property, replaceLogger, setActions, setDependsOn, setDescription, setDidWork, setEnabled, setFinalizedBy, setGroup, setImpliesSubProjects, setMustRunAfter, setOnlyIf, setOnlyIf, setProperty, setShouldRunAfter, shouldRunAfter, usesService</code></li>
+<code>appendParallelSafeAction, compareTo, configure, dependsOn, doFirst, doFirst, doFirst, doLast, doLast, doLast, finalizedBy, getActions, getAnt, getAsDynamicObject, getConvention, getDependsOn, getDestroyables, getDidWork, getEnabled, getExtensions, getFinalizedBy, getIdentityPath, getImpliesSubProjects, getInputs, getLocalState, getLogger, getLogging, getMustRunAfter, getName, getOnlyIf, getOutputs, getPath, getProject, getRequiredServices, getServices, getSharedResources, getShouldRunAfter, getStandardOutputCapture, getState, getTaskActions, getTaskDependencies, getTaskIdentity, getTemporaryDir, getTemporaryDirFactory, getTimeout, hasProperty, hasTaskActions, injectIntoNewInstance, isEnabled, isHasCustomActions, mustRunAfter, onlyIf, onlyIf, prependParallelSafeAction, property, replaceLogger, setActions, setDependsOn, setDescription, setDidWork, setEnabled, setFinalizedBy, setGroup, setImpliesSubProjects, setMustRunAfter, setOnlyIf, setOnlyIf, setProperty, setShouldRunAfter, shouldRunAfter, usesService</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -270,6 +278,38 @@ extends org.gradle.api.DefaultTask</pre>
 <li class="blockList">
 <h4>run</h4>
 <pre>public&nbsp;void&nbsp;run()</pre>
+</li>
+</ul>
+<a name="getGroup--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getGroup</h4>
+<pre>@Internal
+public&nbsp;java.lang.String&nbsp;getGroup()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getGroup</code>&nbsp;in interface&nbsp;<code>org.gradle.api.Task</code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>getGroup</code>&nbsp;in class&nbsp;<code>org.gradle.api.internal.AbstractTask</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getDescription--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDescription</h4>
+<pre>@Internal
+public&nbsp;java.lang.String&nbsp;getDescription()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>getDescription</code>&nbsp;in interface&nbsp;<code>org.gradle.api.Task</code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code>getDescription</code>&nbsp;in class&nbsp;<code>org.gradle.api.internal.AbstractTask</code></dd>
+</dl>
 </li>
 </ul>
 <a name="getTopicName--">
@@ -356,7 +396,7 @@ extends org.gradle.api.DefaultTask</pre>
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../../../com/nike/pdm/localstack/aws/sns/SnsModule.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../com/nike/pdm/localstack/aws/sns/ListSnsTopicsTask.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" target="_top">Frames</a></li>

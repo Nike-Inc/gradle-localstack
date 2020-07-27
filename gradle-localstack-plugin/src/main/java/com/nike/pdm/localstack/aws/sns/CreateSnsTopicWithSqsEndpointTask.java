@@ -20,6 +20,7 @@ import com.nike.pdm.localstack.core.Retry;
 import com.nike.pdm.localstack.core.annotation.LocalStackSetupTask;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.TaskAction;
 
@@ -85,6 +86,18 @@ public class CreateSnsTopicWithSqsEndpointTask extends DefaultTask {
 
             return null;
         });
+    }
+
+    @Internal
+    @Override
+    public String getGroup() {
+        return SnsModule.GROUP_NAME;
+    }
+
+    @Internal
+    @Override
+    public String getDescription() {
+        return "Creates an SNS topic with a subscribed SQS endpoint.";
     }
 
     /**

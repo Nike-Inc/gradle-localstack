@@ -66,7 +66,7 @@ public class ListSqsQueuesTask extends DefaultTask {
 
                 ConsoleLogger.log(at.render());
             } else {
-                ConsoleLogger.log("No Buckets Found!");
+                ConsoleLogger.log("No Queues Found!");
             }
 
             return null;
