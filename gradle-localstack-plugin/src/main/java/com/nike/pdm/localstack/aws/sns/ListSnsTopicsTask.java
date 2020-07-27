@@ -1,7 +1,15 @@
+/**
+ * Copyright 2020-present, Nike, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the Apache-2.0 license found in
+ * the LICENSE file in the root directory of this source tree.
+ */
 package com.nike.pdm.localstack.aws.sns;
 
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.ListTopicsResult;
+import com.amazonaws.services.sns.model.Subscription;
 import com.amazonaws.services.sns.model.Topic;
 import com.nike.pdm.localstack.aws.AwsClientFactory;
 import com.nike.pdm.localstack.compose.LocalStackModule;
@@ -10,9 +18,11 @@ import com.nike.pdm.localstack.core.Retry;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Task that lists SNS topics.
@@ -34,7 +44,7 @@ public class ListSnsTopicsTask extends DefaultTask {
             at.getContext().setWidth(150);
 
             at.addRule();
-            at.addRow("TopicName", "TopicArn");
+            at.addRow("TopicName", "TopicArn", "Subscriptions");
             at.addRule();
 
             String nextToken = null;
@@ -43,9 +53,14 @@ public class ListSnsTopicsTask extends DefaultTask {
                 final ListTopicsResult listTopicsResult = amazonSNS.listTopics(nextToken);
 
                 for (Topic topic : listTopicsResult.getTopics()) {
-                    String topicName = snsTaskUtil.getTopicNameFromArn(topic.getTopicArn());
+                    final String topicName = snsTaskUtil.getTopicName(topic.getTopicArn());
+                    final List<Subscription> subscriptions = snsTaskUtil.getSubscriptions(topic.getTopicArn());
 
-                    at.addRow(topicName, topic.getTopicArn());
+                    final StringBuilder subsBuilder = new StringBuilder();
+                    subscriptions.forEach(subscription -> subsBuilder.append(subscription.getSubscriptionArn())
+                            .append(System.lineSeparator()));
+
+                    at.addRow(topicName, topic.getTopicArn(), subsBuilder.toString());
                     at.addRule();
 
                     topicCnt++;
@@ -64,11 +79,13 @@ public class ListSnsTopicsTask extends DefaultTask {
         });
     }
 
+    @Internal
     @Override
     public String getGroup() {
         return SnsModule.GROUP_NAME;
     }
 
+    @Internal
     @Override
     public String getDescription() {
         return "Lists SNS topics.";

@@ -7,9 +7,16 @@
  */
 package com.nike.pdm.localstack.aws.sns;
 
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.model.ListSubscriptionsByTopicResult;
+import com.amazonaws.services.sns.model.Subscription;
 import com.amazonaws.util.StringUtils;
+import com.nike.pdm.localstack.aws.AwsClientFactory;
 import com.nike.pdm.localstack.compose.LocalStackExtension;
 import org.gradle.api.Project;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility methods shared amongst the SNS tasks.
@@ -40,11 +47,36 @@ public class SnsTaskUtil {
      * @param topicArn topic arn
      * @return topic name
      */
-    public String getTopicNameFromArn(String topicArn) {
+    public String getTopicName(String topicArn) {
         if (!StringUtils.isNullOrEmpty(topicArn)) {
             return topicArn.substring(topicArn.lastIndexOf(":") + 1);
         }
 
         return null;
+    }
+
+    /**
+     * Gets a list of all subscriptions for a topic.
+     *
+     * @param topicArn topic arn
+     * @return list of subscriptions
+     */
+    public List<Subscription> getSubscriptions(String topicArn) {
+        List<Subscription> subscriptions = new ArrayList<>();
+
+        if (!StringUtils.isNullOrEmpty(topicArn)) {
+            final AmazonSNS amazonSNS = AwsClientFactory.getInstance().sns(project);
+
+            String nextToken = null;
+            do {
+                ListSubscriptionsByTopicResult listSubscriptionsByTopicResult = amazonSNS.listSubscriptionsByTopic(topicArn, nextToken);
+
+                subscriptions.addAll(listSubscriptionsByTopicResult.getSubscriptions());
+
+                nextToken = listSubscriptionsByTopicResult.getNextToken();
+            } while (nextToken != null);
+        }
+
+        return subscriptions;
     }
 }
