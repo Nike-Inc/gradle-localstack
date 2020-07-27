@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -151,6 +151,12 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>com.amazonaws.services.sns.AmazonSNS</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/nike/pdm/localstack/aws/AwsClientFactory.html#sns-org.gradle.api.Project-">sns</a></span>(org.gradle.api.Project&nbsp;project)</code>
+<div class="block">Gets a client for the AWS SNS service.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>com.amazonaws.services.sqs.AmazonSQS</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../com/nike/pdm/localstack/aws/AwsClientFactory.html#sqs-org.gradle.api.Project-">sqs</a></span>(org.gradle.api.Project&nbsp;project)</code>
 <div class="block">Gets a client for the AWS SQS service.</div>
@@ -238,11 +244,27 @@ extends java.lang.Object</pre>
 <a name="sqs-org.gradle.api.Project-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>sqs</h4>
 <pre>public&nbsp;com.amazonaws.services.sqs.AmazonSQS&nbsp;sqs(org.gradle.api.Project&nbsp;project)</pre>
 <div class="block">Gets a client for the AWS SQS service.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>project</code> - gradle project</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>aws client</dd>
+</dl>
+</li>
+</ul>
+<a name="sns-org.gradle.api.Project-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>sns</h4>
+<pre>public&nbsp;com.amazonaws.services.sns.AmazonSNS&nbsp;sns(org.gradle.api.Project&nbsp;project)</pre>
+<div class="block">Gets a client for the AWS SNS service.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>project</code> - gradle project</dd>

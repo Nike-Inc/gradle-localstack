@@ -42,9 +42,10 @@ public class CreateSnsTopicWithSqsEndpointTask extends DefaultTask {
 
     @TaskAction
     public void run() {
-        // Create sqs endpoint
+        // Create queue endpoint
         String sqsQueueUrl = Retry.execute(() -> {
             final SqsTaskUtil sqsTaskUtil = new SqsTaskUtil(getProject());
+            final String queueName = getQueueName();
 
             if (sqsTaskUtil.queueExists(queueName)) {
                 ConsoleLogger.log("SQS queue endpoint already exists: %s", queueName);
@@ -73,11 +74,10 @@ public class CreateSnsTopicWithSqsEndpointTask extends DefaultTask {
             return topic.getTopicArn();
         });
 
+        // Subscribe the queue to the topic
         Retry.execute(() -> {
             final AmazonSNS amazonSns = AwsClientFactory.getInstance().sns(getProject());
             final AmazonSQS amazonSqs = AwsClientFactory.getInstance().sqs(getProject());
-
-            ConsoleLogger.log("Creating SNS Subscription");
 
             String subscriptionArn = Topics.subscribeQueue(amazonSns, amazonSqs, topicArn, sqsQueueUrl);
 

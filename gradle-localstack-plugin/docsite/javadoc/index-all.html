@@ -126,6 +126,8 @@
 <dd>&nbsp;</dd>
 <dt><a href="com/nike/pdm/localstack/aws/s3/package-summary.html">com.nike.pdm.localstack.aws.s3</a> - package com.nike.pdm.localstack.aws.s3</dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/nike/pdm/localstack/aws/sns/package-summary.html">com.nike.pdm.localstack.aws.sns</a> - package com.nike.pdm.localstack.aws.sns</dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/nike/pdm/localstack/aws/sqs/package-summary.html">com.nike.pdm.localstack.aws.sqs</a> - package com.nike.pdm.localstack.aws.sqs</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/nike/pdm/localstack/boot/package-summary.html">com.nike.pdm.localstack.boot</a> - package com.nike.pdm.localstack.boot</dt>
@@ -145,6 +147,8 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/dynamodb/DynamoDbModule.html#CREATE_DYNAMODB_TABLE_TASK_NAME">CREATE_DYNAMODB_TABLE_TASK_NAME</a></span> - Static variable in class com.nike.pdm.localstack.aws.dynamodb.<a href="com/nike/pdm/localstack/aws/dynamodb/DynamoDbModule.html" title="class in com.nike.pdm.localstack.aws.dynamodb">DynamoDbModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/s3/S3Module.html#CREATE_S3_BUCKET_TASK_NAME">CREATE_S3_BUCKET_TASK_NAME</a></span> - Static variable in class com.nike.pdm.localstack.aws.s3.<a href="com/nike/pdm/localstack/aws/s3/S3Module.html" title="class in com.nike.pdm.localstack.aws.s3">S3Module</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/SnsModule.html#CREATE_SNS_TOPIC_WITH_QUEUE_TASK_NAME">CREATE_SNS_TOPIC_WITH_QUEUE_TASK_NAME</a></span> - Static variable in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/SnsModule.html" title="class in com.nike.pdm.localstack.aws.sns">SnsModule</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsModule.html#CREATE_SQS_QUEUE_WITH_DLQ_TASK_NAME">CREATE_SQS_QUEUE_WITH_DLQ_TASK_NAME</a></span> - Static variable in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsModule.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsModule</a></dt>
 <dd>&nbsp;</dd>
@@ -171,6 +175,12 @@
 <div class="block">Task that creates S3 buckets.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/s3/CreateS3BucketsTask.html#CreateS3BucketsTask--">CreateS3BucketsTask()</a></span> - Constructor for class com.nike.pdm.localstack.aws.s3.<a href="com/nike/pdm/localstack/aws/s3/CreateS3BucketsTask.html" title="class in com.nike.pdm.localstack.aws.s3">CreateS3BucketsTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">CreateSnsTopicWithSqsEndpointTask</span></a> - Class in <a href="com/nike/pdm/localstack/aws/sns/package-summary.html">com.nike.pdm.localstack.aws.sns</a></dt>
+<dd>
+<div class="block">Task that creates an SNS topic with an attached SQS queue.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#CreateSnsTopicWithSqsEndpointTask--">CreateSnsTopicWithSqsEndpointTask()</a></span> - Constructor for class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns">CreateSnsTopicWithSqsEndpointTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueuesTask.html" title="class in com.nike.pdm.localstack.aws.sqs"><span class="typeNameLink">CreateSqsQueuesTask</span></a> - Class in <a href="com/nike/pdm/localstack/aws/sqs/package-summary.html">com.nike.pdm.localstack.aws.sqs</a></dt>
 <dd>
@@ -468,10 +478,6 @@
 <dd>
 <div class="block">Sets the provisioned throughput for the table.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueArn-java.lang.String-">getQueueArn(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
-<dd>
-<div class="block">Gets the ARN of an SQS queue based on its queue url.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html#getQueueArnFromName-java.lang.String-">getQueueArnFromName(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsTaskUtil</a></dt>
 <dd>
 <div class="block">Gets the ARN of an SQS queue based on its queue name.</div>
@@ -487,6 +493,10 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html#getQueueAttributes--">getQueueAttributes()</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueueWithDlqTask</a></dt>
 <dd>
 <div class="block">Gets the queue attributes to apply to the created queue.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#getQueueName--">getQueueName()</a></span> - Method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns">CreateSnsTopicWithSqsEndpointTask</a></dt>
+<dd>
+<div class="block">Gets the name of the queue to subscribe to the created topic.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html#getQueueName--">getQueueName()</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueueWithDlqTask</a></dt>
 <dd>
@@ -575,6 +585,14 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/cloudformation/CreateCFStackTask.html#getTimeoutInMinutes--">getTimeoutInMinutes()</a></span> - Method in class com.nike.pdm.localstack.aws.cloudformation.<a href="com/nike/pdm/localstack/aws/cloudformation/CreateCFStackTask.html" title="class in com.nike.pdm.localstack.aws.cloudformation">CreateCFStackTask</a></dt>
 <dd>
 <div class="block">Gets the timeout.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/SnsTaskUtil.html#getTopicArn-java.lang.String-">getTopicArn(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/SnsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sns">SnsTaskUtil</a></dt>
+<dd>
+<div class="block">Gets the ARN of an SNS topic based on its name.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#getTopicName--">getTopicName()</a></span> - Method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns">CreateSnsTopicWithSqsEndpointTask</a></dt>
+<dd>
+<div class="block">Gets the name of the topic to create.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/compose/LocalStackExtension.html#getWorkingDir--">getWorkingDir()</a></span> - Method in class com.nike.pdm.localstack.compose.<a href="com/nike/pdm/localstack/compose/LocalStackExtension.html" title="class in com.nike.pdm.localstack.compose">LocalStackExtension</a></dt>
 <dd>
@@ -667,6 +685,10 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/s3/S3Module.html#load-org.gradle.api.Project-">load(Project)</a></span> - Static method in class com.nike.pdm.localstack.aws.s3.<a href="com/nike/pdm/localstack/aws/s3/S3Module.html" title="class in com.nike.pdm.localstack.aws.s3">S3Module</a></dt>
 <dd>
 <div class="block">Loads and configures all tasks in the S3 group.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/SnsModule.html#load-org.gradle.api.Project-">load(Project)</a></span> - Static method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/SnsModule.html" title="class in com.nike.pdm.localstack.aws.sns">SnsModule</a></dt>
+<dd>
+<div class="block">Loads and configures all tasks in the SNS group.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/SqsModule.html#load-org.gradle.api.Project-">load(Project)</a></span> - Static method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/SqsModule.html" title="class in com.nike.pdm.localstack.aws.sqs">SqsModule</a></dt>
 <dd>
@@ -808,6 +830,8 @@
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/s3/ListS3BucketsTask.html#run--">run()</a></span> - Method in class com.nike.pdm.localstack.aws.s3.<a href="com/nike/pdm/localstack/aws/s3/ListS3BucketsTask.html" title="class in com.nike.pdm.localstack.aws.s3">ListS3BucketsTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/s3/PurgeS3BucketsTask.html#run--">run()</a></span> - Method in class com.nike.pdm.localstack.aws.s3.<a href="com/nike/pdm/localstack/aws/s3/PurgeS3BucketsTask.html" title="class in com.nike.pdm.localstack.aws.s3">PurgeS3BucketsTask</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#run--">run()</a></span> - Method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns">CreateSnsTopicWithSqsEndpointTask</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueuesTask.html#run--">run()</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueuesTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueuesTask</a></dt>
 <dd>&nbsp;</dd>
@@ -983,6 +1007,10 @@
 <dd>
 <div class="block">Sets the specified attributes on the queue.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#setQueueName-java.lang.String-">setQueueName(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns">CreateSnsTopicWithSqsEndpointTask</a></dt>
+<dd>
+<div class="block">Sets the name of the queue to subscribe to the created topic.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html#setQueueName-java.lang.String-">setQueueName(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sqs.<a href="com/nike/pdm/localstack/aws/sqs/CreateSqsQueueWithDlqTask.html" title="class in com.nike.pdm.localstack.aws.sqs">CreateSqsQueueWithDlqTask</a></dt>
 <dd>
 <div class="block">Sets the name of the queue to create.</div>
@@ -1063,10 +1091,28 @@
 <dd>
 <div class="block">Sets the timeout.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html#setTopicName-java.lang.String-">setTopicName(String)</a></span> - Method in class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html" title="class in com.nike.pdm.localstack.aws.sns">CreateSnsTopicWithSqsEndpointTask</a></dt>
+<dd>
+<div class="block">Sets the name of the topic to create.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/compose/LocalStackExtension.html#setWorkingDir-java.io.File-">setWorkingDir(File)</a></span> - Method in class com.nike.pdm.localstack.compose.<a href="com/nike/pdm/localstack/compose/LocalStackExtension.html" title="class in com.nike.pdm.localstack.compose">LocalStackExtension</a></dt>
 <dd>
 <div class="block">Sets the LocalStack working directory.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/AwsClientFactory.html#sns-org.gradle.api.Project-">sns(Project)</a></span> - Method in class com.nike.pdm.localstack.aws.<a href="com/nike/pdm/localstack/aws/AwsClientFactory.html" title="class in com.nike.pdm.localstack.aws">AwsClientFactory</a></dt>
+<dd>
+<div class="block">Gets a client for the AWS SNS service.</div>
+</dd>
+<dt><a href="com/nike/pdm/localstack/aws/sns/SnsModule.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">SnsModule</span></a> - Class in <a href="com/nike/pdm/localstack/aws/sns/package-summary.html">com.nike.pdm.localstack.aws.sns</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/SnsModule.html#SnsModule--">SnsModule()</a></span> - Constructor for class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/SnsModule.html" title="class in com.nike.pdm.localstack.aws.sns">SnsModule</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com/nike/pdm/localstack/aws/sns/SnsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sns"><span class="typeNameLink">SnsTaskUtil</span></a> - Class in <a href="com/nike/pdm/localstack/aws/sns/package-summary.html">com.nike.pdm.localstack.aws.sns</a></dt>
+<dd>
+<div class="block">Utility methods shared amongst the SNS tasks.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com/nike/pdm/localstack/aws/sns/SnsTaskUtil.html#SnsTaskUtil-org.gradle.api.Project-">SnsTaskUtil(Project)</a></span> - Constructor for class com.nike.pdm.localstack.aws.sns.<a href="com/nike/pdm/localstack/aws/sns/SnsTaskUtil.html" title="class in com.nike.pdm.localstack.aws.sns">SnsTaskUtil</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/nike/pdm/localstack/boot/SpringBootExtension.html" title="class in com.nike.pdm.localstack.boot"><span class="typeNameLink">SpringBootExtension</span></a> - Class in <a href="com/nike/pdm/localstack/boot/package-summary.html">com.nike.pdm.localstack.boot</a></dt>
 <dd>
 <div class="block">Extension properties for the Spring Boot module.</div>

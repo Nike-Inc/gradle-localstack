@@ -12,6 +12,8 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.slf4j.Logger;
@@ -61,5 +63,22 @@ public class AwsConfiguration {
     @Bean
     public AmazonSQS amazonSQS() {
         return AmazonSQSClientBuilder.defaultClient();
+    }
+
+    @Profile("local")
+    @Bean
+    public AmazonSNS localAmazonSns() {
+        LOG.info("Creating LocalStack SNS client");
+
+        return AmazonSNSClientBuilder.standard()
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:4566", "us-east-1"))
+                .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
+                .build();
+    }
+
+    @Profile("!local")
+    @Bean
+    public AmazonSNS amazonSns() {
+        return AmazonSNSClientBuilder.defaultClient();
     }
 }
