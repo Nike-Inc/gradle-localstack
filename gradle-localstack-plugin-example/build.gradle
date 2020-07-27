@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.model.KeyType
 import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
 import com.nike.pdm.localstack.aws.dynamodb.CreateDynamoDbTableTask
 import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+import com.nike.pdm.localstack.aws.sns.CreateSnsTopicWithSqsEndpointTask
 import com.nike.pdm.localstack.aws.sqs.CreateSqsQueueWithDlqTask
 
 buildscript {
@@ -41,6 +42,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "com.amazonaws:aws-java-sdk-dynamodb:${awsVersion}"
     implementation "com.amazonaws:aws-java-sdk-sqs:${awsVersion}"
+    implementation "com.amazonaws:aws-java-sdk-sns:${awsVersion}"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
@@ -67,6 +69,10 @@ localstack {
 
 task setupLocalQueue(type: CreateSqsQueueWithDlqTask) {
     queueName = 'catalog-product-change-notification'
+}
+
+task setupLocalTopic(type: CreateSnsTopicWithSqsEndpointTask) {
+    topicName = 'catalog-product-drops'
 }
 
 task setupLocalTable(type: CreateDynamoDbTableTask) {

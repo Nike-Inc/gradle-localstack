@@ -10,6 +10,7 @@ package com.nike.pdm.localstack.aws;
 import com.nike.pdm.localstack.aws.cloudformation.CloudFormationModule;
 import com.nike.pdm.localstack.aws.dynamodb.DynamoDbModule;
 import com.nike.pdm.localstack.aws.s3.S3Module;
+import com.nike.pdm.localstack.aws.sns.SnsModule;
 import com.nike.pdm.localstack.aws.sqs.SqsModule;
 import org.gradle.api.Project;
 
@@ -30,5 +31,6 @@ public class AwsModule {
         DynamoDbModule.load(project);
         S3Module.load(project);
         SqsModule.load(project);
+        SnsModule.load(project);
     }
 }

@@ -10,13 +10,12 @@ package com.nike.pdm.localstack.aws.sqs;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.CreateQueueRequest;
 import com.amazonaws.services.sqs.model.CreateQueueResult;
-import com.amazonaws.services.sqs.model.GetQueueAttributesRequest;
 import com.amazonaws.services.sqs.model.GetQueueAttributesResult;
 import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.QueueDoesNotExistException;
-import com.amazonaws.services.sqs.model.SetQueueAttributesResult;
 import com.amazonaws.util.StringUtils;
 import com.nike.pdm.localstack.aws.AwsClientFactory;
+import com.nike.pdm.localstack.compose.LocalStackExtension;
 import org.gradle.api.Project;
 
 import java.util.ArrayList;
@@ -103,27 +102,15 @@ public class SqsTaskUtil {
     }
 
     /**
-     * Gets the ARN of an SQS queue based on its queue url.
-     *
-     * @param queueUrl sqs queue url
-     * @return queue arn
-     */
-    public String getQueueArn(String queueUrl) {
-        final AmazonSQS amazonSQS = AwsClientFactory.getInstance().sqs(project);
-
-        GetQueueAttributesResult queueAttributes = amazonSQS.getQueueAttributes(new GetQueueAttributesRequest(queueUrl));
-        return queueAttributes.getAttributes().get("QueueArn");
-    }
-
-    /**
      * Gets the ARN of an SQS queue based on its queue name.
      *
      * @param queueName queue name
      * @return queue arn
      */
     public String getQueueArnFromName(String queueName) {
-        final String queueUrl = getQueueUrl(queueName);
-        return getQueueArn(queueUrl);
+        LocalStackExtension ext = project.getExtensions().getByType(LocalStackExtension.class);
+
+        return String.format("arn:aws:sqs:%s:000000000000:%s", ext.getSigningRegion(), queueName);
     }
 
     /**
