@@ -14,4 +14,6 @@ include::50-aws-s3.adoc[]
 
 include::60-aws-sqs.adoc[]
 
-include::70-spring-boot.adoc[]
+include::70-aws-sns.adoc[]
+
+include::100-spring-boot.adoc[]

@@ -1,0 +1,1 @@
+./gradlew deleteSnsTopic --topicName=catalog-product-drops

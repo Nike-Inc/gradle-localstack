@@ -1,0 +1,1 @@
+./gradlew listSnsTopicSubscriptions --topicName=catalog-product-drops

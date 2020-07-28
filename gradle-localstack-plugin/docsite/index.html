@@ -482,10 +482,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#examples_4">7.2. Examples</a></li>
 </ul>
 </li>
-<li><a href="#springboot">8. Spring Boot</a>
+<li><a href="#sns">8. SNS</a>
 <ul class="sectlevel2">
 <li><a href="#tasks_6">8.1. Tasks</a></li>
-<li><a href="#configuration_2">8.2. Configuration</a></li>
+<li><a href="#examples_5">8.2. Examples</a></li>
+</ul>
+</li>
+<li><a href="#springboot">9. Spring Boot</a>
+<ul class="sectlevel2">
+<li><a href="#tasks_7">9.1. Tasks</a></li>
+<li><a href="#configuration_2">9.2. Configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -725,7 +731,10 @@ supports the following AWS services:</p>
 <p><a href="#s3">S3</a></p>
 </li>
 <li>
-<p><a href="#s3">SQS</a></p>
+<p><a href="#sqs">SQS</a></p>
+</li>
+<li>
+<p><a href="#sns">SNS</a></p>
 </li>
 </ol>
 </div>
@@ -1146,7 +1155,107 @@ website for CloudFormation support issues.
 </div>
 </div>
 <div class="sect1">
-<h2 id="springboot"><a class="anchor" href="#springboot"></a>8. Spring Boot</h2>
+<h2 id="sns"><a class="anchor" href="#sns"></a>8. SNS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This plugin provides a set of tasks for working with AWS SNS in your project.</p>
+</div>
+<div class="sect2">
+<h3 id="tasks_6"><a class="anchor" href="#tasks_6"></a>8.1. Tasks</h3>
+<div class="paragraph">
+<p>The plugin provides both default and custom tasks.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 21.7391%;">
+<col style="width: 21.7391%;">
+<col style="width: 13.0434%;">
+<col style="width: 43.4784%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Task</th>
+<th class="tableblock halign-left valign-top">Task Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./javadoc/com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html">CreateSnsTopicWithSqsEndpoint</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>createSnsTopicWithSqsEndpoint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Custom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates SNS Topic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./javadoc/com/nike/pdm/localstack/aws/sns/DeleteSnsTopicTask.html">DeleteSnsTopicTask</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteSnsTopic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes an SNS Topic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./javadoc/com/nike/pdm/localstack/aws/sns/ListSnsTopicsTask.html">ListSnsTopicsTask</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listSnsTopics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all SNS Topics</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="./javadoc/com/nike/pdm/localstack/aws/sns/ListSnsTopicSubscriptionsTask.html">ListSnsTopicSubscriptionsTask</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listSnsTopicSubscriptions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all Subscriptions on SNS Topic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="examples_5"><a class="anchor" href="#examples_5"></a>8.2. Examples</h3>
+<div class="paragraph">
+<p>Example configurations for the SNS tasks. For information on all available task properties please refer to the <a href="./javadoc/index.html">Javadocs</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="create_topic_with_sqs_endpoint"><a class="anchor" href="#create_topic_with_sqs_endpoint"></a>8.2.1. Create Topic with SQS Endpoint</h4>
+<div class="listingblock primary">
+<div class="title">Groovy</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">task setupLocalTopic(type: CreateSnsTopicWithSqsEndpointTask) {
+    topicName = 'catalog-product-drops'
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete_topic"><a class="anchor" href="#delete_topic"></a>8.2.2. Delete Topic</h4>
+<div class="listingblock primary">
+<div class="title">Bash</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">./gradlew deleteSnsTopic --topicName=catalog-product-drops</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="list_topics"><a class="anchor" href="#list_topics"></a>8.2.3. List Topics</h4>
+<div class="listingblock primary">
+<div class="title">Bash</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">./gradlew listSnsTopics</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="list_topic_subscriptions"><a class="anchor" href="#list_topic_subscriptions"></a>8.2.4. List Topic Subscriptions</h4>
+<div class="listingblock primary">
+<div class="title">Bash</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">./gradlew listSnsTopicSubscriptions --topicName=catalog-product-drops</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="springboot"><a class="anchor" href="#springboot"></a>9. Spring Boot</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This plugin is designed to work seamlessly with Spring Boot. When the Spring Boot plugin is detected within the project
@@ -1154,7 +1263,7 @@ this plugin will automatically add tasks that make developing and debugging your
 seamless.</p>
 </div>
 <div class="sect2">
-<h3 id="tasks_6"><a class="anchor" href="#tasks_6"></a>8.1. Tasks</h3>
+<h3 id="tasks_7"><a class="anchor" href="#tasks_7"></a>9.1. Tasks</h3>
 <div class="paragraph">
 <p>The plugin applies default tasks, which can be executed from the Gradle command line:</p>
 </div>
@@ -1190,7 +1299,7 @@ seamless.</p>
 </table>
 </div>
 <div class="sect2">
-<h3 id="configuration_2"><a class="anchor" href="#configuration_2"></a>8.2. Configuration</h3>
+<h3 id="configuration_2"><a class="anchor" href="#configuration_2"></a>9.2. Configuration</h3>
 <div class="paragraph">
 <p>The plugin provides a nested extension with the namespace <code>springboot</code>. The following properties can be configured:</p>
 </div>
@@ -1262,7 +1371,7 @@ seamless.</p>
 <div id="footer">
 <div id="footer-text">
 Version 0.1.0.0<br>
-Last updated 2020-07-14 18:54:17 -0700
+Last updated 2020-07-28 14:00:46 -0700
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

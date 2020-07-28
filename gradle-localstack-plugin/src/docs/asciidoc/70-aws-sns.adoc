@@ -1,0 +1,47 @@
+[#sns]
+== SNS
+This plugin provides a set of tasks for working with AWS SNS in your project.
+
+=== Tasks
+The plugin provides both default and custom tasks.
+
+[options="header"]
+[cols="5,5,3,10"]
+|=======
+|Task |Task Name |Type | Description
+| link:./javadoc/com/nike/pdm/localstack/aws/sns/CreateSnsTopicWithSqsEndpointTask.html[CreateSnsTopicWithSqsEndpoint]|`createSnsTopicWithSqsEndpoint`  | Custom  | Creates SNS Topic
+| link:./javadoc/com/nike/pdm/localstack/aws/sns/DeleteSnsTopicTask.html[DeleteSnsTopicTask]|`deleteSnsTopic`   | Default | Deletes an SNS Topic
+| link:./javadoc/com/nike/pdm/localstack/aws/sns/ListSnsTopicsTask.html[ListSnsTopicsTask]|`listSnsTopics`   | Default | Lists all SNS Topics
+| link:./javadoc/com/nike/pdm/localstack/aws/sns/ListSnsTopicSubscriptionsTask.html[ListSnsTopicSubscriptionsTask]|`listSnsTopicSubscriptions`   | Default | Lists all Subscriptions on SNS Topic
+|=======
+
+=== Examples
+Example configurations for the SNS tasks. For information on all available task properties please refer to the link:./javadoc/index.html[Javadocs].
+
+==== Create Topic with SQS Endpoint
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-sns-createtopicwithsqsendpoint/groovy/build.gradle[]
+----
+
+==== Delete Topic
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-sns-deletetopic/bash/example.sh[]
+----
+
+==== List Topics
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-sns-listtopics/bash/example.sh[]
+----
+
+==== List Topic Subscriptions
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Bash
+----
+include::{samplesCodeDir}/aws-sns-listtopicsubscriptions/bash/example.sh[]
+----

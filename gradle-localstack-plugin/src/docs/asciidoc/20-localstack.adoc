@@ -23,6 +23,7 @@ supports the following AWS services:
 1. <<30-aws-cloudformation.adoc#cloudformation,CloudFormation>>
 2. <<40-aws-dynamodb.adoc#dynamodb,DynamoDB>>
 3. <<50-aws-s3.adoc#s3,S3>>
-4. <<60-aws-sqs.adoc#s3,SQS>>
+4. <<60-aws-sqs.adoc#sqs,SQS>>
+5. <<70-aws-sns.adoc#sns,SNS>>
 
 For more information on how to configure and use these tasks, see the documentation for each AWS service below.
