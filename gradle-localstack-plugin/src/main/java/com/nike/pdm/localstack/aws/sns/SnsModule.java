@@ -18,6 +18,7 @@ public class SnsModule {
     public static final String CREATE_SNS_TOPIC_WITH_QUEUE_TASK_NAME = "createSnsTopicWithSqsEndpoint";
     public static final String LIST_SNS_TOPICS_TASK_NAME = "listSnsTopics";
     public static final String LIST_SNS_TOPIC_SUBSCRIPTIONS_TASK_NAME = "listSnsTopicSubscriptions";
+    public static final String DELETE_SNS_TOPIC_TASK_NAME = "deleteSnsTopic";
 
     /**
      * Loads and configures all tasks in the SNS group.
@@ -28,6 +29,7 @@ public class SnsModule {
         final Map<String, Class> tasks = new HashMap<>();
         tasks.put(LIST_SNS_TOPICS_TASK_NAME, ListSnsTopicsTask.class);
         tasks.put(LIST_SNS_TOPIC_SUBSCRIPTIONS_TASK_NAME, ListSnsTopicSubscriptionsTask.class);
+        tasks.put(DELETE_SNS_TOPIC_TASK_NAME, DeleteSnsTopicTask.class);
 
         tasks.forEach((name, clazz) -> {
             // Register default tasks with the project

@@ -102,10 +102,20 @@ public class ListSnsTopicSubscriptionsTask extends DefaultTask {
         return "Lists subscriptions to SNS topic.";
     }
 
+    /**
+     * Gets the name of the topic for which to list subscriptions.
+     *
+     * @return topic name
+     */
     public String getTopicName() {
         return topicName;
     }
 
+    /**
+     * Sets the name of the topic for which to list subscriptions.
+     *
+     * @param topicName topic name
+     */
     @Option(option = "topicName", description = "Name of topic for which to list subscriptions")
     public void setTopicName(String topicName) {
         this.topicName = topicName;
