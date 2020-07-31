@@ -28,6 +28,7 @@ public class LocalStackModule {
     public static final String STOP_LOCALSTACK_TASK_NAME = "stopLocalStack";
     public static final String KILL_LOCALSTACK_TASK_NAME = "killLocalStack";
     public static final String CLEAN_LOCALSTACK_TASK_NAME = "cleanLocalStack";
+    public static final String RESTART_LOCALSTACK_TASK_NAME = "restartLocalStack";
 
     /**
      * Loads and configures tasks in the LocalStack group.
@@ -42,6 +43,7 @@ public class LocalStackModule {
         createStopLocalStackTask(project);
         createKillLocalStackTask(project);
         createCleanLocalStackTask(project);
+        createRestartLocalStackTask(project);
 
         configureLocalStackSetupTasks(project);
     }
@@ -76,8 +78,8 @@ public class LocalStackModule {
         project.getTasks().create(KILL_LOCALSTACK_TASK_NAME, task -> {
             task.setGroup(LocalStackPlugin.GROUP_NAME);
             task.setDescription("Kills the currently running LocalStack environment.");
-            task.setDependsOn(Arrays.asList("composeDownForced", "cleanLocalStack"));
-            task.setMustRunAfter(Arrays.asList("composeDownForced", "cleanLocalStack"));
+            task.setDependsOn(Arrays.asList("composeDownForced", CLEAN_LOCALSTACK_TASK_NAME));
+            task.setMustRunAfter(Arrays.asList("composeDownForced", CLEAN_LOCALSTACK_TASK_NAME));
 
             task.doLast(task1 -> ConsoleLogger.log("LocalStack Stopped"));
         });
@@ -93,6 +95,18 @@ public class LocalStackModule {
             task.doLast(task1 -> {
                 ConsoleLogger.log("Cleaning the LocalStack data directory");
                 LocalStackDir.deleteData(project);
+            });
+        });
+    }
+
+    private static void createRestartLocalStackTask(Project project) {
+        project.getTasks().create(RESTART_LOCALSTACK_TASK_NAME, task -> {
+            task.setGroup(LocalStackPlugin.GROUP_NAME);
+            task.setDescription("Restarts running LocalStack environment with clean .localstack directory.");
+            task.setDependsOn(Arrays.asList(KILL_LOCALSTACK_TASK_NAME, START_LOCALSTACK_TASK_NAME));
+
+            task.doFirst(task1 -> {
+                ConsoleLogger.log("Restarting LocalStack");
             });
         });
     }
