@@ -15,6 +15,7 @@ The plugin applies default tasks, which can be executed from the Gradle command 
 |`stopLocalStack`   | Default | `./gradlew stopLocalStack` |Stops the LocalStack environment and preserves the `.localstack` data directory.
 |`killLocalStack`   | Default | `./gradlew killLocalStack` |Stops the LocalStack environment and deletes the `.localstack` data directory.
 |`cleanLocalStack`  | Default | `./gradlew cleanLocalStack` |Deletes the `.localstack` data directory.
+|`restartLocalStack`| Default | `./gradlew restartLocalStack`|Restarts running LocalStack environment with clean `.localstack` directory.
 |=======
 
 The plugin also provides tasks that make working with the mock AWS endpoints in LocalStack easy. Currently, the plugin

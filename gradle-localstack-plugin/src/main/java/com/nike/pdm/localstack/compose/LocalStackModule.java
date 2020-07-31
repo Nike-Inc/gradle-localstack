@@ -104,10 +104,6 @@ public class LocalStackModule {
             task.setGroup(LocalStackPlugin.GROUP_NAME);
             task.setDescription("Restarts running LocalStack environment with clean .localstack directory.");
             task.setDependsOn(Arrays.asList(KILL_LOCALSTACK_TASK_NAME, START_LOCALSTACK_TASK_NAME));
-
-            task.doFirst(task1 -> {
-                ConsoleLogger.log("Restarting LocalStack");
-            });
         });
     }
 
