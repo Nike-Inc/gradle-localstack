@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 @Timeout(value = 3, unit = TimeUnit.MINUTES)
-class RestartLocalStackFuncationalTest extends Specification {
+class RestartLocalStackFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
