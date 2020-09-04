@@ -13,13 +13,9 @@ import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
-import spock.lang.Timeout
-
-import java.util.concurrent.TimeUnit
 
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
-@Timeout(value = 3, unit = TimeUnit.MINUTES)
 class CreateDynamoDbTableFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()

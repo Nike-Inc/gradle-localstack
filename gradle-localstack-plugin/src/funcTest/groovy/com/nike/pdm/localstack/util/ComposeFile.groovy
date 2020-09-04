@@ -28,7 +28,6 @@ class ComposeFile {
                 networks:
                   - gradle-localstack-plugin-test
                 environment:
-                  - SERVICES=cloudformation,dynamodb,s3,sqs,sns
                   - DEBUG=1
                   - DATA_DIR=/tmp/localstack/data
                   - AWS_ACCESS_KEY_ID=dummy
