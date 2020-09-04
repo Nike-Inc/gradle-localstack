@@ -2,8 +2,7 @@
 # This script builds the project in Travis
 export GRADLE_OPTS="-Dorg.gradle.daemon=false"
 
-cd ../gradle-localstack-plugin
-pwd
+cd gradle-localstack-plugin
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo -e "Build Pull Request #$TRAVIS_PULL_REQUEST => Branch [$TRAVIS_BRANCH]"
