@@ -79,13 +79,12 @@ class RestartLocalStackFunctionalTest extends Specification {
 
         then:
         setupResult.task(":startLocalStack").outcome == SUCCESS
-        setupResult.output.contains("Created DynamoDB table: catalog.products")
 
         restartResult.task(":restartLocalStack").outcome == SUCCESS
         restartResult.output.contains("Task :cleanLocalStack")
         restartResult.output.contains("Task :killLocalStack")
         restartResult.output.contains("Task :composeUp")
-        restartResult.output.contains("Task :setupLocalTable")
+        restartResult.output.contains("Task :setupS3Bucket")
         restartResult.output.contains("Task :startLocalStack")
     }
 }
