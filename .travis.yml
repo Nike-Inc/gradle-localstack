@@ -1,0 +1,15 @@
+dist: trusty
+language: java
+sudo: false
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+install: true
+script: "./ci/build-travis.sh"
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.m2"
