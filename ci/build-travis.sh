@@ -6,7 +6,7 @@ cd gradle-localstack-plugin
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo -e "Build Pull Request #$TRAVIS_PULL_REQUEST => Branch [$TRAVIS_BRANCH]"
-  ./gradlew clean build
+  ./gradlew clean build funcTest
 elif [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_TAG" == "" ]; then
   echo -e 'Build Branch with Snapshot => Branch ['$TRAVIS_BRANCH']'
   ./gradlew clean build

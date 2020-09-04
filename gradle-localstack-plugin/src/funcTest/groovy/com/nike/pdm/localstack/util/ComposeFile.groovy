@@ -25,10 +25,10 @@ class ComposeFile {
                 container_name: gradle-localstack-plugin-test
                 ports:
                   - '4566:4566'   # LocalStack Edge
-                  - '8055:8080'   # LocalStack Console
                 networks:
                   - gradle-localstack-plugin-test
                 environment:
+                  - SERVICES=cloudformation,dynamodb,s3,sqs,sns
                   - DEBUG=1
                   - DATA_DIR=/tmp/localstack/data
                   - AWS_ACCESS_KEY_ID=dummy
