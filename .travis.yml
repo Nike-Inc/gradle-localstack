@@ -1,24 +1,30 @@
 language: java
 sudo: true
 jdk:
-  - openjdk11
+- openjdk11
 services:
-  - docker
+- docker
 env:
+  matrix:
   - DOCKER_COMPOSE_VERSION=1.26.2
+  global:
+  - secure: gAZvgpvlFXb066j4y6v9/DpLqIwLGcFK6dD7uu/snKRx4MmkKchTxRr28nULkuDyp0OC6uVt1NcA4Pm5AxiBJEmdQdOCsVk/xR0JRUfKorQ6N+jAto6Hgzp2iuRJiNQ+Q5jQDqD0Bjh3+9nqcrsBqCmWz7eeQ/W6kZMljhiKt/3PUdYmODRBvl4AFSO4bP3QP6hCIcozATGvBMxwA8lVYoCe5b20MNUNqRELPH78q9WUFGdlAbmXDLumusP/F6rAw7BpQs5g0jAbw94I46A4IxIcFFekBsFtRp/0Mx3qkNnuKoT2KvNF27FLBovxNnotX9kMWBdsfac8kSR4rI0O46PepIo4sr+McpwE3Q79VlXnE12qtHta8IonHpUhpxbVn6/mAk5cDaI22po9jPmjOzSIel6meukhxm8TcCsrAQuEhcSrLZINJ4OpBWglZ+uBgks6f48EzEpbY5GH4ZLHW5K/2lrFbnOSzXZsRVLJLIH2MkZWg/cmDfaeSlnoQ9Gb7Ye19NvCqXV20qt6t/ayS171BsYAPmMzuqVGtqm/CU45ga0L+kyLsi4WvlLnm+rMsVL8xV7YO/11sI14VnOSU4KiCCF8rGqWhcA5kAPlO6f5ljgYTTo8qU7S1G/lccAzQppvx2XONmrEsZ8BZSK0KhxlHL4HIWFdQlH+bcj+ELs=
+  - secure: hnZT2vLszT2taNSfqGPmrZV9HAoL+d6AdLJ6JUzB5vJoSXpA0bQeKDc89NY0robsseASKO7VzL3UezxCMRbXED/qtTIzno90OvPRwScrUrfGp8jyx9QrzYzyKCiaIPSmidzQx/iZN2GK1cNU5Xc7kK5BbIbl42TWqT427sFYDIPVTDPQlkGGhb9TdnYwfnVJk0WATf4Q5ABqceZAbJ9kgcKdC6OT1FD1iDM2qavx2jBVXakLt9L4zctYOTgWnYm8JNKpgzdwEBIjpHfFuTj1wytt1J3xMPTQLGl/3BYP87DaX0ClHSR+F+vGJj7ESX5TAkV6gXDCmpy2zYN7XJ1d69WXG//IRCUWXqTaQB8yYdNRBV88LTfSPh6h4mC2jSOw/p0GpSakKWE7f+h8rL+lplbqb1ahZOJQza2PF7nP44gLgKuYkokd5vEtrme1PjUxLfHDTUh52a/E0WK6tpxjrkZ8Rvp6JABq4dVn3UAK0WuVTZB7b8P9HssMieGEs6yq1XGj0Ljz7TLfG8IZtqxwb2g6nMY1PhIUWsG9sLOXCP7k0Wx6m1WmJEuijJbz1UUXjvQdat8cc37d8+MZswuc4pysXY66mLTjAwGdPBfvJIWeAqFZU/V4yv/nOuKGiqnKsrCtUXsNL0n5GdDpKpL8KsnMxrVSvjJLGgUNvu9g+zc=
 install: true
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-script: 
-  - "cd gradle-localstack-plugin"
-  - "sudo ./gradlew check build buildDocSite -x funcTest --console plain"
+- sudo rm /usr/local/bin/docker-compose
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname
+  -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+script:
+- cd gradle-localstack-plugin
+- sudo ./gradlew check build buildDocSite -x funcTest --console plain
 after_success:
-  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && ./gradlew publishPlugins --console plain
+- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && ./gradlew
+  publishPlugins --console plain
 before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
   directories:
   - "$HOME/.gradle/caches/"
