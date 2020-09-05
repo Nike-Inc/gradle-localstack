@@ -1,5 +1,6 @@
 # gradle-localstack
 [![][travis img]][travis]
+[![][docs img]][docs]
 [![][license img]][license]
 
 Gradle plugin for setting up mock AWS endpoints during test and development using [LocalStack](https://github.com/localstack/localstack).
@@ -48,6 +49,9 @@ Please refer to the included sample project, [gradle-localstack-plugin-example](
 
 [travis]:https://travis-ci.org/Nike-Inc/gradle-localstack
 [travis img]:https://travis-ci.org/Nike-Inc/gradle-localstack.svg?branch=master
+
+[docs]:http://nike-inc.github.io/gradle-localstack
+[docs img]:https://img.shields.io/badge/Documentation%3F-yes-green.svg
 
 [license]:LICENSE.txt
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
