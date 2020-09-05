@@ -96,7 +96,7 @@ task buildDocSite(type: Copy) {
     group('Documentation')
     description('Builds the documentation website for the plugin.')
     dependsOn('build', 'cleanDocSite', 'asciidoctor')
-    destinationDir = file("docsite")
+    destinationDir = file("../docs")
 
     from ("${buildDir}/docs/asciidoc") {
         include "index.html"
