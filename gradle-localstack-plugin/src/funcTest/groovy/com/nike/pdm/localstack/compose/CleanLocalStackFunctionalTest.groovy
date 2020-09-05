@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import static org.junit.Assert.assertTrue
 
-@Timeout(value= 3, unit = TimeUnit.MINUTES)
+@Timeout(value = 3, unit = TimeUnit.MINUTES)
 class CleanLocalStackFunctionalTest extends Specification {
 
     @Rule TemporaryFolder testProjectDir = new TemporaryFolder()
