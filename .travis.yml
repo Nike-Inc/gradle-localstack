@@ -1,11 +1,22 @@
-dist: trusty
 language: java
-sudo: false
+sudo: true
 jdk:
-  - oraclejdk8
-  - oraclejdk9
+  - openjdk11
+services:
+  - docker
+env:
+  - DOCKER_COMPOSE_VERSION=1.26.2
 install: true
-script: "./ci/build-travis.sh"
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+script: 
+  - "cd gradle-localstack-plugin"
+  - "sudo ./gradlew check build buildDocSite -x funcTest --console plain"
+after_success:
+  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && ./gradlew publishPlugins --console plain
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:

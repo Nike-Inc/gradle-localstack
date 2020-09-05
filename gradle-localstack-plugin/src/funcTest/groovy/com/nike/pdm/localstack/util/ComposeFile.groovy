@@ -25,7 +25,6 @@ class ComposeFile {
                 container_name: gradle-localstack-plugin-test
                 ports:
                   - '4566:4566'   # LocalStack Edge
-                  - '8055:8080'   # LocalStack Console
                 networks:
                   - gradle-localstack-plugin-test
                 environment:

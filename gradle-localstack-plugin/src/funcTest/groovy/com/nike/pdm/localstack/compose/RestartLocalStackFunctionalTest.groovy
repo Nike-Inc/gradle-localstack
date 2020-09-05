@@ -42,12 +42,8 @@ class RestartLocalStackFunctionalTest extends Specification {
     def "should restart localstack"() {
         given:
         buildFile << """
-            import com.amazonaws.services.dynamodbv2.model.AttributeDefinition
-            import com.amazonaws.services.dynamodbv2.model.KeySchemaElement
-            import com.amazonaws.services.dynamodbv2.model.KeyType
-            import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType
-            import com.nike.pdm.localstack.aws.dynamodb.CreateDynamoDbTableTask
-
+            import com.nike.pdm.localstack.aws.s3.CreateS3BucketsTask
+            
             plugins {
                 id "java"
                 id "org.springframework.boot"           version "2.2.4.RELEASE"
@@ -61,14 +57,8 @@ class RestartLocalStackFunctionalTest extends Specification {
                 useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
             }
             
-            task setupLocalTable(type: CreateDynamoDbTableTask) {
-                tableName = 'catalog.products'
-                keySchema = [
-                        new KeySchemaElement("id", KeyType.HASH)
-                ]
-                attributeDefinitions = [
-                        new AttributeDefinition("id", ScalarAttributeType.S)
-                ]
+            task setupS3Bucket(type: CreateS3BucketsTask) {
+                buckets = [ 'catalog-product-bucket' ]
             }
         """
 
@@ -89,13 +79,12 @@ class RestartLocalStackFunctionalTest extends Specification {
 
         then:
         setupResult.task(":startLocalStack").outcome == SUCCESS
-        setupResult.output.contains("Created DynamoDB table: catalog.products")
 
         restartResult.task(":restartLocalStack").outcome == SUCCESS
         restartResult.output.contains("Task :cleanLocalStack")
         restartResult.output.contains("Task :killLocalStack")
         restartResult.output.contains("Task :composeUp")
-        restartResult.output.contains("Task :setupLocalTable")
+        restartResult.output.contains("Task :setupS3Bucket")
         restartResult.output.contains("Task :startLocalStack")
     }
 }
