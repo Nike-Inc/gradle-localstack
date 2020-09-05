@@ -17,7 +17,10 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script: 
-  - sudo ./ci/build-travis.sh
+  - "cd gradle-localstack-plugin"
+  - "sudo ./gradlew check build buildDocSite funcTest"
+after_success:
+  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && ./gradlew publishPlugins
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 cache:
