@@ -41,7 +41,7 @@ plugins {
 ```
 
 ### Documentation
-For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](gradle-localstack-plugin/docsite/index.html).
+For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](http://nike-inc.github.io/gradle-localstack).
 
 ### Example
 Please refer to the included sample project, [gradle-localstack-plugin-example](gradle-localstack-plugin-example), for a simple demonstration on applying and configuring the plugin.
