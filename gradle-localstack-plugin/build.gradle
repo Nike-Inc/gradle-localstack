@@ -6,6 +6,7 @@ plugins {
     id "org.asciidoctor.jvm.convert"    version "3.1.0"
     id "com.github.hierynomus.license"  version "0.15.0"
     id "org.unbroken-dome.test-sets"    version "3.0.1"
+    id "com.adarshr.test-logger"        version "2.1.0"
 }
 
 // Project Configuration
