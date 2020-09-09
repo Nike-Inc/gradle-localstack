@@ -2,6 +2,7 @@
 # This script builds the project in Travis
 export GRADLE_OPTS="-Dorg.gradle.daemon=false"
 
+pwd
 cd ../gradle-localstack-plugin
 
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
