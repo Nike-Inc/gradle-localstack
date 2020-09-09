@@ -2,7 +2,7 @@ plugins {
     id "idea"
     id "groovy"
     id "java-gradle-plugin"
-    id "maven-publish"
+    id "com.gradle.plugin-publish"      version "0.12.0"
     id "org.asciidoctor.jvm.convert"    version "3.1.0"
     id "com.github.hierynomus.license"  version "0.15.0"
     id "org.unbroken-dome.test-sets"    version "3.0.1"
@@ -65,9 +65,17 @@ gradlePlugin {
     plugins {
         localstackPlugin {
             id = pluginId
+            displayName = project.ext.name
+            description = project.description
             implementationClass = "com.nike.pdm.localstack.LocalStackPlugin"
         }
     }
+}
+
+pluginBundle {
+    website = "https://github.com/Nike-Inc/gradle-localstack"
+    vcsUrl  = project.ext.url
+    tags    = [ "localstack", "aws", "spring-boot", "spring", "testing", "integrationtesting" ]
 }
 
 java {
