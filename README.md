@@ -27,11 +27,11 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.nike.pdm.localstack:0.1.0'
+        classpath "com.nike.pdm.localstack:0.1.0"
     }
 }
 
-apply plugin: 'com.nike.pdm.localstack'
+apply plugin: "com.nike.pdm.localstack"
 ```
 
 ### Applying the Plugin with Plugin DSL
