@@ -6,6 +6,6 @@ All notable changes to `gradle-localstack` will be documented in this file.
 
 ### Release Notes
 
-#### Version 0.1.0 - July 2020
+#### Version 0.1.0 - September 2020
 
 - Initial Release
