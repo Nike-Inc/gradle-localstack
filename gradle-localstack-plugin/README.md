@@ -13,21 +13,7 @@ This plugin requires the following plugins to be applied to the project in order
 | [com.avast.gradle.docker-compose](https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose) | Avast Docker-Compose Gradle Plugin
 
 ### Getting Started
-The plugin can be applied with the `buildscript` syntax or the plugin DSL.
-
-#### Applying the Plugin with BuildScript Syntax
-```
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath 'com.nike.pdm.localstack:0.1.0'
-    }
-}
-
-apply plugin: 'com.nike.pdm.localstack'
-```
+The plugin can be applied with either the plugin or legacy buildscript DSL. For more information on applying the plugin and available plugin versions please refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.nike.pdm.localstack).
 
 #### Applying the Plugin with Plugin DSL
 ```
@@ -36,8 +22,24 @@ plugins {
 }
 ```
 
-### Documentation
-For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](docsite/index.html).
+#### Applying the Plugin with Legacy Buildscript DSL
+```
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.nike.pdm.localstack:gradle-localstack-plugin:0.1.0"
+  }
+}
+
+apply plugin: "com.nike.pdm.localstack"
+```
+
+## Documentation
+For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](http://nike-inc.github.io/gradle-localstack).
 
 ## Development
 It is recommended when developing the plugin that you open the [gradle-localstack-plugin-example](../gradle-localstack-plugin-example) project in Intellij as it will include the plugin
