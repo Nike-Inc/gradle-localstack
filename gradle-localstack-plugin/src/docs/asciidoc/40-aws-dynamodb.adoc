@@ -14,6 +14,31 @@ The plugin provides both default and custom tasks.
 | link:./javadoc/com/nike/pdm/localstack/aws/dynamodb/ListDynamoDbTablesTask.html[ListDynamoDbTablesTask]|`listDynamoDbTables`   | Default | Lists all DynamoDB Tables
 |=======
 
+=== Table Initializer
+The plugin not only supports creating DynamoDB tables, but also populating them with data through the use of a Table Initializer.
+
+==== Create Initializer
+In order to create a Table Initializer, create a class on the build classpath (this is most easily done by creating the class in the Gradle `buildSrc` directory)
+that implements the following rules:
+
+1. Constructor that takes an `AmazonDynamoDB` client as a single argument.
+2. Implements a void `run` method with no arguments.
+
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Java
+----
+include::{samplesCodeDir}/aws-dynamodb-tableinitializer/java/ProductTableInitializer.java[]
+----
+
+==== Configure Initializer
+Table Initializers, once created, can be configured on a `CreateDynamoDbTableTask` as follows:
+
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/aws-dynamodb-createtablewithinitializer/groovy/build.gradle[]
+----
+
 === Examples
 Example configurations for the DynamoDB tasks. For information on all available task properties please refer to the link:./javadoc/index.html[Javadocs].
 

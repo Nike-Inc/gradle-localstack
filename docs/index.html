@@ -467,7 +467,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#dynamodb">5. DynamoDB</a>
 <ul class="sectlevel2">
 <li><a href="#tasks_3">5.1. Tasks</a></li>
-<li><a href="#examples_2">5.2. Examples</a></li>
+<li><a href="#table_initializer">5.2. Table Initializer</a></li>
+<li><a href="#examples_2">5.3. Examples</a></li>
 </ul>
 </li>
 <li><a href="#s3">6. S3</a>
@@ -898,12 +899,162 @@ website for CloudFormation support issues.
 </table>
 </div>
 <div class="sect2">
-<h3 id="examples_2"><a class="anchor" href="#examples_2"></a>5.2. Examples</h3>
+<h3 id="table_initializer"><a class="anchor" href="#table_initializer"></a>5.2. Table Initializer</h3>
+<div class="paragraph">
+<p>The plugin not only supports creating DynamoDB tables, but also populating them with data through the use of a Table Initializer.</p>
+</div>
+<div class="sect3">
+<h4 id="create_initializer"><a class="anchor" href="#create_initializer"></a>5.2.1. Create Initializer</h4>
+<div class="paragraph">
+<p>In order to create a Table Initializer, create a class on the build classpath (this is most easily done by creating the class in the Gradle <code>buildSrc</code> directory)
+that implements the following rules:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Constructor that takes an <code>AmazonDynamoDB</code> client as a single argument.</p>
+</li>
+<li>
+<p>Implements a void <code>run</code> method with no arguments.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock primary">
+<div class="title">Java</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">package example.buildsrc.dynamodb;
+
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import org.apache.commons.lang3.StringUtils;
+
+/**
+ * Loads test products into the localstack dynamodb "catalog.products" table.
+ */
+public class ProductTableInitializer {
+
+    private final DynamoDBMapper mapper;
+
+    /**
+     * Creates an instance of {@link ProductTableInitializer}.
+     *
+     * The LocalStack Gradle plugin requires a constructor that accepts the dynamodb client
+     * as a single argument.
+     *
+     * @param dynamoClient
+     */
+    public ProductTableInitializer(AmazonDynamoDB dynamoClient) {
+        this.mapper = new DynamoDBMapper(dynamoClient);
+    }
+
+    /**
+     * Initializes the table.
+     *
+     * The LocalStack Gradle plugin requires a single void method named "run" that does not
+     * accept any arguments.
+     */
+    public void run() {
+        for (int i = 0; i &lt; 10; i++) {
+            final Product product = new Product();
+            product.setId(StringUtils.leftPad(Integer.toString(i), 5, "0"));
+            product.setName(String.format("Widget-%s", i));
+            product.setDescription(String.format("Description for Widget-%s", i));
+            product.setActive(true);
+            product.setCreatedAt(System.currentTimeMillis());
+
+            mapper.save(product);
+        }
+    }
+
+    /**
+     * Product record to load into dynamo table.
+     */
+    @DynamoDBTable(tableName = "catalog.products")
+    public static class Product {
+
+        @DynamoDBHashKey
+        private String id;
+
+        private String name;
+        private String description;
+        private boolean active;
+        private long createdAt;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
+
+        public long getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(long createdAt) {
+            this.createdAt = createdAt;
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="configure_initializer"><a class="anchor" href="#configure_initializer"></a>5.2.2. Configure Initializer</h4>
+<div class="paragraph">
+<p>Table Initializers, once created, can be configured on a <code>CreateDynamoDbTableTask</code> as follows:</p>
+</div>
+<div class="listingblock primary">
+<div class="title">Groovy</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">task setupLocalTable(type: CreateDynamoDbTableTask) {
+    tableName = 'catalog.products'
+    keySchema = [
+            new KeySchemaElement("id", KeyType.HASH)
+    ]
+    attributeDefinitions = [
+            new AttributeDefinition("id", ScalarAttributeType.S)
+    ]
+    initializer = 'example.buildsrc.dynamodb.ProductTableInitializer'
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="examples_2"><a class="anchor" href="#examples_2"></a>5.3. Examples</h3>
 <div class="paragraph">
 <p>Example configurations for the DynamoDB tasks. For information on all available task properties please refer to the <a href="./javadoc/index.html">Javadocs</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="create_table"><a class="anchor" href="#create_table"></a>5.2.1. Create Table</h4>
+<h4 id="create_table"><a class="anchor" href="#create_table"></a>5.3.1. Create Table</h4>
 <div class="listingblock primary">
 <div class="title">Groovy</div>
 <div class="content">
@@ -920,7 +1071,7 @@ website for CloudFormation support issues.
 </div>
 </div>
 <div class="sect3">
-<h4 id="delete_table"><a class="anchor" href="#delete_table"></a>5.2.2. Delete Table</h4>
+<h4 id="delete_table"><a class="anchor" href="#delete_table"></a>5.3.2. Delete Table</h4>
 <div class="listingblock primary">
 <div class="title">Bash</div>
 <div class="content">
@@ -929,7 +1080,7 @@ website for CloudFormation support issues.
 </div>
 </div>
 <div class="sect3">
-<h4 id="list_tables"><a class="anchor" href="#list_tables"></a>5.2.3. List Tables</h4>
+<h4 id="list_tables"><a class="anchor" href="#list_tables"></a>5.3.3. List Tables</h4>
 <div class="listingblock primary">
 <div class="title">Bash</div>
 <div class="content">
