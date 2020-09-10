@@ -24,12 +24,14 @@ The plugin can be applied with the `buildscript` syntax or the plugin DSL.
 ### Applying the Plugin with BuildScript Syntax
 ```
 buildscript {
-    repositories {
-        gradlePluginPortal()
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
     }
-    dependencies {
-        classpath "com.nike.pdm.localstack:0.1.0"
-    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.nike.pdm.localstack:gradle-localstack-plugin:0.1.0"
+  }
 }
 
 apply plugin: "com.nike.pdm.localstack"
