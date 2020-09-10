@@ -19,9 +19,16 @@ This plugin requires the following plugins to be applied to the project in order
 | [com.avast.gradle.docker-compose](https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose) | Avast Docker-Compose Gradle Plugin
 
 ## Getting Started
-The plugin can be applied with the buildscript syntax or the plugin DSL. For more information on applying the plugin and available plugin versions please refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.nike.pdm.localstack).
+The plugin can be applied with either the plugin or legacy buildscript DSL. For more information on applying the plugin and available plugin versions please refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.nike.pdm.localstack).
 
-### Applying the Plugin with BuildScript Syntax
+### Applying the Plugin with Plugin DSL
+```
+plugins {
+    id "com.nike.pdm.localstack"    version "0.1.0"
+}
+```
+
+### Applying the Plugin with Legacy Buildscript DSL
 ```
 buildscript {
   repositories {
@@ -37,18 +44,18 @@ buildscript {
 apply plugin: "com.nike.pdm.localstack"
 ```
 
-### Applying the Plugin with Plugin DSL
-```
-plugins {
-    id "com.nike.pdm.localstack"    version "0.1.0"
-}
-```
-
 ## Documentation
 For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](http://nike-inc.github.io/gradle-localstack).
 
 ## Example
 Please refer to the included sample project, [gradle-localstack-plugin-example](gradle-localstack-plugin-example), for a simple demonstration on applying and configuring the plugin.
+
+## License
+Copyright 2020 - Present, Nike, Inc.
+All rights reserved.
+
+This source code is licensed under the Apache-2.0 license found in
+the LICENSE file in the root directory of this source tree.
 
 [travis]:https://travis-ci.org/Nike-Inc/gradle-localstack
 [travis img]:https://travis-ci.org/Nike-Inc/gradle-localstack.svg?branch=master
