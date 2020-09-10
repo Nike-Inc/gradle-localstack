@@ -44,10 +44,10 @@ plugins {
 }
 ```
 
-### Documentation
+## Documentation
 For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](http://nike-inc.github.io/gradle-localstack).
 
-### Example
+## Example
 Please refer to the included sample project, [gradle-localstack-plugin-example](gradle-localstack-plugin-example), for a simple demonstration on applying and configuring the plugin.
 
 [travis]:https://travis-ci.org/Nike-Inc/gradle-localstack
