@@ -19,7 +19,7 @@ This plugin requires the following plugins to be applied to the project in order
 | [com.avast.gradle.docker-compose](https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose) | Avast Docker-Compose Gradle Plugin
 
 ## Getting Started
-The plugin can be applied with the `buildscript` syntax or the plugin DSL.
+The plugin can be applied with the buildscript syntax or the plugin DSL. For more information on applying the plugin and available plugin versions please refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.nike.pdm.localstack).
 
 ### Applying the Plugin with BuildScript Syntax
 ```
