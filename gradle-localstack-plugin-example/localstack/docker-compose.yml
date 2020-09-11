@@ -5,7 +5,6 @@ services:
     image: localstack/localstack:0.11.3
     ports:
       - '4566:4566'   # LocalStack Edge
-      - '8055:8080'   # LocalStack Console
     environment:
       - DEBUG=1
       - DATA_DIR=/tmp/localstack/data
