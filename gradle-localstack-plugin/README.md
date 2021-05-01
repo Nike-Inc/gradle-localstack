@@ -18,7 +18,7 @@ The plugin can be applied with either the plugin or legacy buildscript DSL. For 
 #### Applying the Plugin with Plugin DSL
 ```
 plugins {
-    id "com.nike.pdm.localstack"    version "0.1.0"
+    id "com.nike.pdm.localstack"    version "0.2.0"
 }
 ```
 
@@ -31,7 +31,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.nike.pdm.localstack:gradle-localstack-plugin:0.1.0"
+    classpath "gradle.plugin.com.nike.pdm.localstack:gradle-localstack-plugin:0.2.0"
   }
 }
 

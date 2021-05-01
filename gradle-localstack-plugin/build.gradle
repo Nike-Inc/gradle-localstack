@@ -51,6 +51,7 @@ dependencies {
     testImplementation "com.github.docker-java:docker-java-transport-httpclient5:3.2.5"
     testImplementation "com.github.stefanbirkner:system-rules:1.19.0"
     testImplementation "com.sun.istack:istack-commons-runtime:3.0.11"
+    testImplementation "org.yaml:snakeyaml:1.28"
 }
 
 // Test Configuration
@@ -112,6 +113,10 @@ task buildDocSite(type: Copy) {
 
     from ("${buildDir}/docs/javadoc") {
         into "javadoc"
+    }
+
+    doLast {
+        new File("../docs/.nojekyll").createNewFile()
     }
 }
 
