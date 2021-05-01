@@ -1,5 +1,5 @@
 # gradle-localstack
-[![][travis img]][travis]
+[![][actions img]][actions]
 [![][docs img]][docs]
 [![][pluginportal img]][pluginportal]
 [![][license img]][license]
@@ -57,8 +57,8 @@ All rights reserved.
 This source code is licensed under the Apache-2.0 license found in
 the LICENSE file in the root directory of this source tree.
 
-[travis]:https://travis-ci.org/Nike-Inc/gradle-localstack
-[travis img]:https://travis-ci.org/Nike-Inc/gradle-localstack.svg?branch=master
+[actions]:https://github.com/Nike-Inc/gradle-localstack/actions/workflows/gradle-build.yml
+[actions img]:https://github.com/Nike-Inc/gradle-localstack/actions/workflows/gradle-build.yml/badge.svg
 
 [docs]:http://nike-inc.github.io/gradle-localstack
 [docs img]:https://img.shields.io/badge/Documentation-yes-green.svg
