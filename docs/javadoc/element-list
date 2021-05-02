@@ -1,0 +1,11 @@
+com.nike.pdm.localstack
+com.nike.pdm.localstack.aws
+com.nike.pdm.localstack.aws.cloudformation
+com.nike.pdm.localstack.aws.dynamodb
+com.nike.pdm.localstack.aws.s3
+com.nike.pdm.localstack.aws.sns
+com.nike.pdm.localstack.aws.sqs
+com.nike.pdm.localstack.boot
+com.nike.pdm.localstack.compose
+com.nike.pdm.localstack.core
+com.nike.pdm.localstack.core.annotation
