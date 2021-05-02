@@ -24,7 +24,7 @@ The plugin can be applied with either the plugin or legacy buildscript DSL. For 
 ### Applying the Plugin with Plugin DSL
 ```
 plugins {
-    id "com.nike.pdm.localstack"    version "0.1.0"
+    id "com.nike.pdm.localstack"    version "0.2.0"
 }
 ```
 
@@ -37,7 +37,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.nike.pdm.localstack:gradle-localstack-plugin:0.1.0"
+    classpath "gradle.plugin.com.nike.pdm.localstack:gradle-localstack-plugin:0.2.0"
   }
 }
 
@@ -64,7 +64,7 @@ the LICENSE file in the root directory of this source tree.
 [docs img]:https://img.shields.io/badge/Documentation-yes-green.svg
 
 [pluginportal]:https://plugins.gradle.org/plugin/com.nike.pdm.localstack
-[pluginportal img]:https://img.shields.io/badge/Gradle%20Plugin%20Portal-v0.1.0-blue.svg
+[pluginportal img]:https://img.shields.io/badge/Gradle%20Plugin%20Portal-v0.2.0-blue.svg
 
 [license]:LICENSE.txt
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg

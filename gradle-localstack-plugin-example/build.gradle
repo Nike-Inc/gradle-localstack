@@ -26,7 +26,7 @@ apply plugin: "com.nike.pdm.localstack"
 
 // Project Configuration
 project.group           = "com.nike.pdm.localstack"
-project.version         = "0.1.0"
+project.version         = "0.2.0"
 project.description     = "Example project that demonstrates the use of the Gradle LocalStack Plugin"
 
 // Version Configuration

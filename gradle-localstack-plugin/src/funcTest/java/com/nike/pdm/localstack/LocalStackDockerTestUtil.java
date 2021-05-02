@@ -30,7 +30,7 @@ public class LocalStackDockerTestUtil {
     private static final Logger LOG = LoggerFactory.getLogger(LocalStackDockerTestUtil.class);
     private static final String LOCALSTACK_TEST_DOCKER_CONTAINER_NAME = "/gradle-localstack-plugin-test";
     private static final String LOCALSTACK_TEST_IMAGE_NAME = "localstack/localstack";
-    private static final String LOCALSTACK_TEST_DOCKER_TAG = "0.11.3";
+    private static final String LOCALSTACK_TEST_DOCKER_TAG = "0.12.10";
 
     private final DockerClient dockerClient;
 

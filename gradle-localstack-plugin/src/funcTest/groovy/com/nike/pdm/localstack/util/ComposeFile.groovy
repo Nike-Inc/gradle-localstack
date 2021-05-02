@@ -21,7 +21,7 @@ class ComposeFile {
             
             services:
               localstack:
-                image: localstack/localstack:0.11.3
+                image: localstack/localstack:0.12.10
                 container_name: gradle-localstack-plugin-test
                 ports:
                   - '4566:4566'   # LocalStack Edge
