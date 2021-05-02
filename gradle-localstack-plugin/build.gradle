@@ -11,7 +11,7 @@ plugins {
 
 // Project Configuration
 project.group           = "com.nike.pdm.localstack"
-project.version         = "0.1.0"
+project.version         = "0.2.0"
 project.description     = "Gradle plugin for interacting with mock AWS endpoints using LocalStack"
 
 project.ext.name        = "gradle-localstack-plugin"
