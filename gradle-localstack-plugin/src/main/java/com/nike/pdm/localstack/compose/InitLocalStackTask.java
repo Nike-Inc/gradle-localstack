@@ -25,7 +25,7 @@ import java.nio.file.Paths;
  * Task that initializes the project with a default LocalStack Docker Compose configuration.
  */
 public class InitLocalStackTask extends DefaultTask {
-    private static final String DEFAULT_LOCALSTACK_DOCKER_COMPOSE_FILE_NAME = "localstack-docker-compose.yml";
+    public static final String DEFAULT_LOCALSTACK_DOCKER_COMPOSE_FILE_NAME = "localstack-docker-compose.yml";
 
     @TaskAction
     public void run() {

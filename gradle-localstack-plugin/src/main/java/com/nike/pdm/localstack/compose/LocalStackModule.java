@@ -7,12 +7,18 @@
  */
 package com.nike.pdm.localstack.compose;
 
+import com.avast.gradle.dockercompose.ComposeExtension;
+import com.avast.gradle.dockercompose.DockerComposePlugin;
 import com.nike.pdm.localstack.LocalStackPlugin;
 import com.nike.pdm.localstack.core.ConsoleLogger;
 import com.nike.pdm.localstack.core.LocalStackDir;
+import com.nike.pdm.localstack.core.RequiredPlugins;
 import com.nike.pdm.localstack.core.annotation.LocalStackSetupTask;
+import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,6 +52,7 @@ public class LocalStackModule {
         createRestartLocalStackTask(project);
 
         configureLocalStackSetupTasks(project);
+        configureDockerComposePlugin(project);
     }
 
     private static void createInitLocalStackTask(Project project) {
@@ -128,6 +135,29 @@ public class LocalStackModule {
         if (!setupTasks.isEmpty()) {
             project.getTasks().getByName(START_LOCALSTACK_TASK_NAME)
                     .getDependsOn().addAll(setupTasks);
+        }
+    }
+
+    /**
+     * Automatically configures the Avast Docker Compose plugin to use the localstack-docker-compose.yml file
+     * for starting LocalStack.
+     *
+     * @param project gradle project
+     */
+    private static void configureDockerComposePlugin(Project project) {
+        if (project.getPlugins().hasPlugin(RequiredPlugins.AVAST_DOCKER_COMPOSE_PLUGIN_ID)) {
+            ComposeExtension composeExt = project.getExtensions().findByType(ComposeExtension.class);
+
+            // Only configure the localstack-docker-compose.yml by default if the compose file is not already
+            // configured via the avast docker compose plugin's extension
+            if (composeExt.getUseComposeFiles() != null && composeExt.getUseComposeFiles().isEmpty()) {
+                File composeFile = Paths.get(LocalStackDir.getDirectory(project).getAbsolutePath(), InitLocalStackTask.DEFAULT_LOCALSTACK_DOCKER_COMPOSE_FILE_NAME).toFile();
+
+                // Only set the compose file if this project has already been initialized with initLocalStack
+                if (composeFile.exists()) {
+                    composeExt.setUseComposeFiles(Arrays.asList(composeFile.getAbsolutePath()));
+                }
+            }
         }
     }
 }

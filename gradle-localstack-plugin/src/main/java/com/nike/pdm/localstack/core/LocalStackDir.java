@@ -68,8 +68,19 @@ public class LocalStackDir {
             }
         }
 
-        // This should not happen
-        throw new GradleException("Cannot find localstack directory");
+        // In the event that the localstack directory cannot be located set it to the root project directory. This means
+        // that the project has not been initialized with the localstack plugin yet.
+        return Paths.get(project.getRootDir().getAbsolutePath(), DEFAULT_LOCALSTACK_DIR_NAME).toFile();
+    }
+
+    /**
+     * Checks to see if the "localstack" working directory exists in the project.
+     *
+     * @param project gradle project
+     * @return <code>true</code> if the working directory exists; otherwise <code>false</code>
+     */
+    public static boolean exists(Project project) {
+        return getDirectory(project).exists();
     }
 
     /**

@@ -53,10 +53,6 @@ bootRun {
 }
 
 // LocalStack Configuration
-dockerCompose {
-    useComposeFiles = [ 'localstack/docker-compose.yml' ]
-}
-
 localstack {
     host = 'localhost'
     port = 4566
