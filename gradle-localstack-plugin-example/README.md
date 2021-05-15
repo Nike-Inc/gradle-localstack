@@ -19,6 +19,6 @@ Run the following command to start the example application in debug mode with a 
 This will start the LocalStack environment and then wait for an attached debugger on port `5005` before starting the example application.
 
 ## LocalStack Gradle Plugin Tasks
-Run the following command to list all of the available LocalStack Gradle plugin tasks for the project:
+Run the following command to list all available LocalStack Gradle plugin tasks for the project:
 
     ./gradlew tasks
