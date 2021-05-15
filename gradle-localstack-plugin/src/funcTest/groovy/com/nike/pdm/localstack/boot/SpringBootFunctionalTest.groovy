@@ -32,14 +32,9 @@ class SpringBootFunctionalTest extends Specification {
                 id "java"
                 id "org.springframework.boot"           version "2.2.4.RELEASE"
                 id "io.spring.dependency-management"    version "1.0.9.RELEASE"
-                id "com.avast.gradle.docker-compose"    version "0.12.1"
             }
             
             apply plugin: "com.nike.pdm.localstack"
-            
-            dockerCompose {
-                useComposeFiles = [ 'localstack/localstack-docker-compose.yml' ]
-            }
         """
 
         when:

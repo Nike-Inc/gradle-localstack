@@ -4,15 +4,7 @@ Gradle plugin for setting up mock AWS endpoints during test and development usin
 This plugin provides a number of helpful tasks for simplifying the creation of AWS resources for use in testing and development, 
 as well as tasks for easily integrating Spring Boot with LocalStack, using simple Gradle DSL.
 
-## Usage
-### Plugin Dependencies
-This plugin requires the following plugins to be applied to the project in order for it to function:
-
-| Plugin Id | Description |
-| --------- | ----------- |
-| [com.avast.gradle.docker-compose](https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose) | Avast Docker-Compose Gradle Plugin
-
-### Getting Started
+## Getting Started
 The plugin can be applied with either the plugin or legacy buildscript DSL. For more information on applying the plugin and available plugin versions please refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.nike.pdm.localstack).
 
 #### Applying the Plugin with Plugin DSL

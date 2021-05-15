@@ -22,6 +22,6 @@ public class RequiredPluginsTest {
     @Test
     public void shouldOnlyRequireAvastDockerComposePlugin() {
         assertEquals(1, RequiredPlugins.PLUGIN_IDS.size());
-        assertTrue(RequiredPlugins.PLUGIN_IDS.contains(RequiredPlugins.AVAST_DOCKER_COMPOSE_PLUGIN_ID));
+        assertTrue(RequiredPlugins.PLUGIN_IDS.containsKey(RequiredPlugins.AVAST_DOCKER_COMPOSE_PLUGIN_ID));
     }
 }

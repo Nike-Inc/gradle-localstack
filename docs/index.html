@@ -441,15 +441,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>Gradle LocalStack Plugin User Guide</h1>
 <div class="details">
-<span id="revnumber">version 0.2.0</span>
+<span id="revnumber">version 1.0.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#plugin_dependencies">1.1. Plugin Dependencies</a></li>
-<li><a href="#getting_started">1.2. Getting Started</a></li>
+<li><a href="#getting_started">1.1. Getting Started</a></li>
 </ul>
 </li>
 <li><a href="#configuration">2. Configuration</a></li>
@@ -526,39 +525,12 @@ This plugin requires Gradle &gt;= 5.2 to work properly.
 </table>
 </div>
 <div class="sect2">
-<h3 id="plugin_dependencies"><a class="anchor" href="#plugin_dependencies"></a>1.1. Plugin Dependencies</h3>
-<div class="paragraph">
-<p>This plugin requires the following plugins to be applied to the project in order for it to function:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Plugin Id</th>
-<th class="tableblock halign-left valign-top">Url</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>com.avast.gradle.docker-compose</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose">com.avast.gradle.docker-compose</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Avast docker-compose plugin</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="getting_started"><a class="anchor" href="#getting_started"></a>1.2. Getting Started</h3>
+<h3 id="getting_started"><a class="anchor" href="#getting_started"></a>1.1. Getting Started</h3>
 <div class="paragraph">
 <p>The plugin can be applied with the <code>buildscript</code> syntax or the plugin DSL.</p>
 </div>
 <div class="sect3">
-<h4 id="applying_the_plugin_using_the_buildscript_syntax"><a class="anchor" href="#applying_the_plugin_using_the_buildscript_syntax"></a>1.2.1. Applying the Plugin using the Buildscript Syntax</h4>
+<h4 id="applying_the_plugin_using_the_buildscript_syntax"><a class="anchor" href="#applying_the_plugin_using_the_buildscript_syntax"></a>1.1.1. Applying the Plugin using the Buildscript Syntax</h4>
 <div class="listingblock primary">
 <div class="title">Groovy</div>
 <div class="content">
@@ -576,7 +548,7 @@ apply plugin: 'com.nike.pdm.localstack'</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="applying_the_plugin_using_the_plugin_dsl"><a class="anchor" href="#applying_the_plugin_using_the_plugin_dsl"></a>1.2.2. Applying the Plugin using the Plugin DSL</h4>
+<h4 id="applying_the_plugin_using_the_plugin_dsl"><a class="anchor" href="#applying_the_plugin_using_the_plugin_dsl"></a>1.1.2. Applying the Plugin using the Plugin DSL</h4>
 <div class="listingblock primary">
 <div class="title">Groovy</div>
 <div class="content">
@@ -1527,7 +1499,7 @@ seamless.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.2.0<br>
+Version 1.0.0<br>
 Last updated 2021-05-01 17:42:47 -0700
 </div>
 </div>

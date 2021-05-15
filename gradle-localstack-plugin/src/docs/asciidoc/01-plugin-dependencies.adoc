@@ -1,8 +1,0 @@
-=== Plugin Dependencies
-This plugin requires the following plugins to be applied to the project in order for it to function:
-
-[options="header"]
-|=======
-|Plugin Id                          | Url | Description
-|`com.avast.gradle.docker-compose`  | https://plugins.gradle.org/plugin/com.avast.gradle.docker-compose[com.avast.gradle.docker-compose] | Avast docker-compose plugin
-|=======

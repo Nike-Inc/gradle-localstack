@@ -11,6 +11,4 @@ documentation below.
 [IMPORTANT]
 This plugin requires Gradle >= 5.2 to work properly.
 
-include::01-plugin-dependencies.adoc[]
-
 include::02-getting-started.adoc[]

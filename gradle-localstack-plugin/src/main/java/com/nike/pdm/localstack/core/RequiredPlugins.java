@@ -7,9 +7,13 @@
  */
 package com.nike.pdm.localstack.core;
 
+import com.avast.gradle.dockercompose.DockerComposePlugin;
+
+import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * Utility class for getting information on plugins that are required to be applied in order to use
@@ -25,7 +29,9 @@ public class RequiredPlugins {
     /**
      * Collection of the plugin ids of all required plugin dependencies.
      */
-    public static final Collection<String> PLUGIN_IDS = Collections.unmodifiableCollection(Arrays.asList(AVAST_DOCKER_COMPOSE_PLUGIN_ID));
+    public static final Map<String, Class<?>> PLUGIN_IDS = Map.ofEntries(
+            new AbstractMap.SimpleEntry<String, Class<?>>(AVAST_DOCKER_COMPOSE_PLUGIN_ID, DockerComposePlugin.class)
+    );
 
     private RequiredPlugins() {
         // Noop
