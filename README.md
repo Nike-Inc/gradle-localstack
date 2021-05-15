@@ -57,7 +57,7 @@ the LICENSE file in the root directory of this source tree.
 [docs img]:https://img.shields.io/badge/Documentation-yes-green.svg
 
 [pluginportal]:https://plugins.gradle.org/plugin/com.nike.pdm.localstack
-[pluginportal img]:https://img.shields.io/badge/Gradle%20Plugin%20Portal-v0.2.0-blue.svg
+[pluginportal img]:https://img.shields.io/badge/Gradle%20Plugin%20Portal-v1.0.0-blue.svg
 
 [license]:LICENSE.txt
 [license img]:https://img.shields.io/badge/License-Apache%202-blue.svg
