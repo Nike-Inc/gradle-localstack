@@ -3,7 +3,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.nike.pdm.localstack:0.2.0'
+        classpath 'com.nike.pdm.localstack:1.0.0'
     }
 }
 
