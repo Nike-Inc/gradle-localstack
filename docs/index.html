@@ -530,7 +530,23 @@ This plugin requires Gradle &gt;= 5.2 to work properly.
 <p>The plugin can be applied with the <code>buildscript</code> syntax or the plugin DSL.</p>
 </div>
 <div class="sect3">
-<h4 id="applying_the_plugin_using_the_buildscript_syntax"><a class="anchor" href="#applying_the_plugin_using_the_buildscript_syntax"></a>1.1.1. Applying the Plugin using the Buildscript Syntax</h4>
+<h4 id="apply_the_plugin"><a class="anchor" href="#apply_the_plugin"></a>1.1.1. Apply the Plugin</h4>
+<div class="paragraph">
+<p>Apply the plugin using either the Plugin DSL or the Buildscript Syntax.</p>
+</div>
+<div class="sect4">
+<h5 id="plugin_dsl"><a class="anchor" href="#plugin_dsl"></a>Plugin DSL</h5>
+<div class="listingblock primary">
+<div class="title">Groovy</div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
+    id "com.nike.pdm.localstack"    version "1.0.0"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="buildscript_syntax"><a class="anchor" href="#buildscript_syntax"></a>Buildscript Syntax</h5>
 <div class="listingblock primary">
 <div class="title">Groovy</div>
 <div class="content">
@@ -547,14 +563,16 @@ apply plugin: 'com.nike.pdm.localstack'</code></pre>
 </div>
 </div>
 </div>
+</div>
 <div class="sect3">
-<h4 id="applying_the_plugin_using_the_plugin_dsl"><a class="anchor" href="#applying_the_plugin_using_the_plugin_dsl"></a>1.1.2. Applying the Plugin using the Plugin DSL</h4>
+<h4 id="initialize_the_project"><a class="anchor" href="#initialize_the_project"></a>1.1.2. Initialize the Project</h4>
+<div class="paragraph">
+<p>Initialize the project by running the <code>initLocalStack</code> task.</p>
+</div>
 <div class="listingblock primary">
-<div class="title">Groovy</div>
+<div class="title">Bash</div>
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="groovy">plugins {
-    id "com.nike.pdm.localstack"    version "1.0.0"
-}</code></pre>
+<pre class="prettyprint highlight"><code data-lang="groovy">./gradlew initLocalStack</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1500,7 +1518,7 @@ seamless.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2021-05-01 17:42:47 -0700
+Last updated 2021-07-01 10:16:05 -0700
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

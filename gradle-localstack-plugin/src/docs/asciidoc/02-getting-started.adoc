@@ -2,17 +2,29 @@
 
 The plugin can be applied with the `buildscript` syntax or the plugin DSL.
 
-==== Applying the Plugin using the Buildscript Syntax
+==== Apply the Plugin
+Apply the plugin using either the Plugin DSL or the Buildscript Syntax.
+
+===== Plugin DSL
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
+.Groovy
+----
+include::{samplesCodeDir}/apply-plugin-plugindsl/groovy/build.gradle[]
+----
+
+===== Buildscript Syntax
 [source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
 .Groovy
 ----
 include::{samplesCodeDir}/apply-plugin-buildscript/groovy/build.gradle[]
 ----
-==== Applying the Plugin using the Plugin DSL
+
+==== Initialize the Project
+Initialize the project by running the `initLocalStack` task.
 [source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
-.Groovy
+.Bash
 ----
-include::{samplesCodeDir}/apply-plugin-plugindsl/groovy/build.gradle[]
+include::{samplesCodeDir}/init-localstack/bash/example.sh[]
 ----
 
 No other configuration is necessary at this point. If you wish to override any of the configuration options you can
