@@ -14,14 +14,17 @@ Use the plugin to easily create and interact with all of the AWS resources requi
 ## Getting Started
 The plugin can be applied with either the plugin or legacy buildscript DSL. For more information on applying the plugin and available plugin versions please refer to the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.nike.pdm.localstack).
 
-### Applying the Plugin with Plugin DSL
+### Apply the Plugin
+Apply the plugin using the Plugin DSL or the Buildscript DSL.
+
+#### Plugin DSL
 ```
 plugins {
     id "com.nike.pdm.localstack"    version "1.0.0"
 }
 ```
 
-### Applying the Plugin with Legacy Buildscript DSL
+#### Buildscript DSL
 ```
 buildscript {
   repositories {
@@ -36,6 +39,11 @@ buildscript {
 
 apply plugin: "com.nike.pdm.localstack"
 ```
+
+### Initialize the Project
+Initialize the project by running the `initLocalStack` task.
+
+    ./gradlew initLocalStack
 
 ## Documentation
 For detailed documentation on this plugin and its features please refer to the [LocalStack Gradle Plugin User Guide](http://nike-inc.github.io/gradle-localstack).
