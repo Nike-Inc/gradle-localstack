@@ -136,7 +136,7 @@ public class SpringBootModule {
                 jvmArgs.add(String.format(BOOT_PROFILES_ARG_FORMAT, String.join(",", ext.getSpringboot().getProfiles())));
             }
         } else {
-            jvmArgs.add(String.format(BOOT_PROFILES_ARG_FORMAT, SpringBootExtension.DEFAULT_PROFILES));
+            jvmArgs.add(String.format(BOOT_PROFILES_ARG_FORMAT, String.join(",", SpringBootExtension.DEFAULT_PROFILES)));
         }
     }
 }
